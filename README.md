@@ -14,10 +14,12 @@ A production-oriented, privacy-preserving civic-tech platform and installable Pr
 
 Normal users do **not** need to install Docker, Node.js, Python, or configure any servers or API keys. The Android app is completely self-contained and works immediately offline upon installation:
 
-1. **Open the GitHub Releases page:** Navigate to the [GitHub Releases](https://github.com/d3f4ult-0/staysafe/releases) page.
-2. **Download the latest `.apk`:** Tap on [**bengal-safety-map.apk**](https://github.com/d3f4ult-0/staysafe/releases/latest/download/bengal-safety-map.apk) (or download the `.aab` for Google Play bundles).
-3. **Allow installation if prompted:** When Android asks for permission to install unknown apps from your browser or file manager, tap **Settings** and toggle **Allow from this source**.
-4. **Install and open:** Tap **Install**, then tap **Open**.
+1. **Download the APK directly to your phone:**
+   - ⚡ [**bengal-safety-map-arm64.apk (Fast Download, ~28 MB)**](https://github.com/d3f4ult-0/staysafe/releases/latest/download/bengal-safety-map-arm64.apk) — **Recommended for 99% of Android phones** (Samsung, Xiaomi, Vivo, Oppo, Realme, OnePlus, Motorola, Pixel).
+   - 🌐 [**bengal-safety-map.apk (Universal, ~87 MB)**](https://github.com/d3f4ult-0/staysafe/releases/latest/download/bengal-safety-map.apk) — All architectures (older 32-bit devices, emulators).
+   - Or browse all assets on the [GitHub Releases](https://github.com/d3f4ult-0/staysafe/releases) page.
+2. **Allow installation if prompted:** When Android asks for permission to install unknown apps from your browser or file manager, tap **Settings** and toggle **Allow from this source**.
+3. **Install and open:** Tap **Install**, then tap **Open**.
 
 ### Immediate Out-of-the-Box Experience:
 - **No sign-in or account:** No login, registration, phone number, or permissions required.
