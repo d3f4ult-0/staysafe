@@ -1,0 +1,96 @@
+name: Build Android Release (APK & AAB)
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: 'Build target: apk (direct sideload) or aab (Google Play)'
+        required: true
+        default: 'apk'
+        type: choice
+        options:
+          - apk
+          - aab
+          - both
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-android:
+    name: Build Android Artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java Development Kit (JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/mobile/package-lock.json
+
+      - name: Install Mobile Dependencies
+        run: npm --prefix apps/mobile ci --legacy-peer-deps
+
+      - name: Static Typecheck & Unit Tests
+        run: |
+          npm --prefix apps/mobile run typecheck
+          npm --prefix apps/mobile test
+
+      - name: Generate Android Native Project (Expo Prebuild)
+        run: |
+          npx --prefix apps/mobile expo prebuild --platform android --no-install
+
+      - name: Build Android APK (Debug / Direct Install)
+        if: ${{ github.event.inputs.build_type == 'apk' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
+        run: |
+          cd apps/mobile/android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Build Android AAB (Release Bundle for Play Store)
+        if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
+        run: |
+          cd apps/mobile/android
+          ./gradlew bundleRelease --no-daemon
+
+      - name: Upload APK to GitHub Artifacts
+        if: ${{ github.event.inputs.build_type == 'apk' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: bengal-safety-map-apk
+          path: apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload AAB to GitHub Artifacts
+        if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: bengal-safety-map-aab
+          path: apps/mobile/android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Attach APK to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

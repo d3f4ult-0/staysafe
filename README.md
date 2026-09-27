@@ -40,12 +40,25 @@ A production-oriented, privacy-preserving civic-tech platform and installable Pr
 
 ## 🏗️ Architecture & Technology Stack
 
-- **Frontend:** Next.js 15, React 19, TypeScript, Tailwind CSS, Lucide Icons.
-- **PWA & Offline:** Service Worker (`sw.js`), Web App Manifest (`manifest.json`), CacheStorage, and downloadable SHA-256-checksummed GeoJSON packages.
-- **Mapping:** MapLibre GL JS with accessible table/list alternatives for keyboard and screen-reader accessibility.
+- **Mobile App:** Expo SDK 52, React Native 0.76.6, Expo Router v4, Zustand, TanStack Query, Offline SQLite/Storage, Lucide Icons.
+- **Web App & PWA:** Next.js 15, React 19, TypeScript, Tailwind CSS, Service Worker (`sw.js`), Web App Manifest (`manifest.json`), CacheStorage.
+- **Mapping:** MapLibre GL JS & Spatial Cluster Canvas with accessible table/list alternatives for screen-reader and accessibility compliance.
 - **Backend API:** FastAPI (Python 3.12+), Pydantic v2, SQLAlchemy 2.0, GeoAlchemy2 / PostGIS.
 - **Database:** PostgreSQL 16 + PostGIS 3.4.
-- **ETL Engine:** 14-stage idempotent pipeline with SHA-256 artifact hashing, PII redaction, spatial generalization, temporal normalization, conservative deduplication, and quarantine routing.
+- **ETL Engine:** 14-stage idempotent pipeline with SHA-256 artifact hashing, PII redaction, spatial generalization (~500m cells), temporal normalization, conservative deduplication, and quarantine routing.
+
+---
+
+## 📱 Mobile App Screens & Capabilities
+
+The mobile application (`apps/mobile`) includes 6 comprehensive tabs and modal routes:
+1. **Explore Map (`/`):** Spatial cluster pins, ~500m grid display, accessible toggle between graphical canvas and table view, category and temporal filtering.
+2. **Night Lens (`/night`):** Dedicated analytical lens for incidents occurring between 20:00 and 05:00 IST, calculating proportion of known occurrence times and exposing data missingness rates.
+3. **Area Summary (`/summary`):** Zone selector (Kolkata Central, Heritage North, South, Port, Salt Lake Sector V, New Town, Howrah) displaying population normalization rates and official census caveats.
+4. **Sources & Methodology (`/sources`):** Institutional data sources registry, verification tiers, and explicit policies prohibiting unvetted social media/rumor feeds.
+5. **Offline Downloads (`/offline`):** Regional cryptographic bundle downloads, local SQLite/storage caching, and automatic stale package expiration warnings.
+6. **Settings & Governance (`/settings`):** English / Bengali (বাংলা) interface toggles, configurable API host endpoints, and the Civic Ethics Charter.
+7. **Legal Case Timeline (`/case/[id]`):** Append-only procedural history tracking (Reported -> FIR -> Investigation -> Chargesheet -> Trial -> Acquittal/Conviction) with statutory presumption of innocence disclaimers.
 
 ---
 
@@ -60,7 +73,7 @@ A production-oriented, privacy-preserving civic-tech platform and installable Pr
 # 1. Clone repository
 git clone <repo-url> && cd staysafe
 
-# 2. Run bootstrap script
+# 2. Run bootstrap script (sets up DB, API, Web, and Mobile)
 ./scripts/bootstrap.sh
 ```
 
@@ -68,7 +81,7 @@ git clone <repo-url> && cd staysafe
 
 ```bash
 # 1. Copy environment template
-cp infra/.env.example .env
+cp .env.example .env
 
 # 2. Start all services (PostGIS, Redis, API, Frontend)
 docker compose -f infra/docker-compose.yml up -d
@@ -80,9 +93,43 @@ docker compose -f infra/docker-compose.yml exec api python -m bengal_safety_map.
 ```
 
 Once running:
-- **Web PWA:** [http://localhost:3000](http://localhost:3000)
+- **Web App (PWA):** [http://localhost:3000](http://localhost:3000)
 - **API Documentation (Swagger UI):** [http://localhost:8000/docs](http://localhost:8000/docs)
 - **Health Check:** [http://localhost:8000/health](http://localhost:8000/health)
+
+### Running the Mobile App (Expo)
+
+```bash
+# Start Expo development server
+cd apps/mobile
+npx expo start
+
+# Run on connected Android device or emulator:
+npx expo run:android
+
+# Run web preview:
+npx expo start --web
+```
+
+---
+
+## 📦 Android APK & AAB Release Builds
+
+To generate installable Android APKs and Google Play AABs:
+
+- **Automated GitHub Actions:** Trigger the workflow at `.github/workflows/android-release.yml` on demand or by tagging a release (`v1.0.0`). Download the generated APK directly from the GitHub Actions Artifacts or Releases tab.
+- **Local Helper Script:**
+  ```bash
+  # Run typecheck and jest test suite:
+  ./scripts/build-mobile.sh test
+
+  # Export Android bundle:
+  ./scripts/build-mobile.sh export
+
+  # Prebuild and compile debug APK (requires Android SDK & Java 17):
+  ./scripts/build-mobile.sh apk
+  ```
+- Detailed release and sideloading instructions are documented in [`docs/mobile-release.md`](docs/mobile-release.md).
 
 ---
 

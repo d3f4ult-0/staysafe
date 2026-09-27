@@ -56,16 +56,16 @@ Bengal Safety Map is designed as a privacy-first, civic-tech decision support pl
                            |  - /api/v1/sources & /methodology      |
                            +-------------------+--------------------+
                                                |
-                         +---------------------+---------------------+
-                         |                                           |
-                         v                                           v
-       +-----------------------------------+       +-----------------------------------+
-       |    Next.js 15 Progressive Web App |       |  Downloadable Offline Packages    |
-       |  - MapLibre GL JS (Vector/Canvas) |       |  - Versioned GeoJSON Bundles      |
-       |  - Night-Time Lens (20:00-05:00)  |       |  - Provenance & Methodology       |
-       |  - Accessible Tables & Summaries  |       |  - SHA-256 Checksum Manifest      |
-       |  - Service Worker Cache / Offline |       |  - 30-Day Freshness Expiry        |
-       +-----------------------------------+       +-----------------------------------+
+                         +---------------------+---------------------+---------------------+
+                         |                                           |                                           |
+                         v                                           v                                           v
+       +-----------------------------------+       +-----------------------------------+       +-----------------------------------+
+       |    Next.js 15 Progressive Web App |       |    Expo Mobile App (React Native) |       |  Downloadable Offline Packages    |
+       |  - MapLibre GL JS (Vector/Canvas) |       |  - Expo Router v4 (Tabs & Modal)  |       |  - Versioned GeoJSON Bundles      |
+       |  - Night-Time Lens (20:00-05:00)  |       |  - Night Lens & Spatial Grid View |       |  - Provenance & Methodology       |
+       |  - Accessible Tables & Summaries  |       |  - Offline Storage & Verification |       |  - SHA-256 Checksum Manifest      |
+       |  - Service Worker Cache / Offline |       |  - Android APK / AAB Build Target |       |  - 30-Day Freshness Expiry        |
+       +-----------------------------------+       +-----------------------------------+       +-----------------------------------+
 ```
 
 ---

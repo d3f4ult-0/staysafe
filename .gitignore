@@ -29,3 +29,14 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Expo & Mobile
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+dist-android/
+dist-test/
