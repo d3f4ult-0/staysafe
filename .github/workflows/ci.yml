@@ -83,13 +83,17 @@ jobs:
           node-version: '20'
 
       - name: Install Mobile Dependencies
-        run: npm --prefix apps/mobile install --legacy-peer-deps
+        working-directory: apps/mobile
+        run: npm install --legacy-peer-deps
 
       - name: TypeScript Static Typecheck
-        run: npm --prefix apps/mobile run typecheck
+        working-directory: apps/mobile
+        run: npm run typecheck
 
       - name: Run Mobile Test Suite
-        run: npm --prefix apps/mobile test
+        working-directory: apps/mobile
+        run: npm test
 
       - name: Export Mobile Bundle (Android Target)
-        run: npx --prefix apps/mobile expo export --platform android --output-dir dist-android
+        working-directory: apps/mobile
+        run: npx expo export --platform android --output-dir dist-android

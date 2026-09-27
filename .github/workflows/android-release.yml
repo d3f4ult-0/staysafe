@@ -16,6 +16,9 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: write
+
 jobs:
   build-android:
     name: Build Signed Android Release
@@ -42,21 +45,24 @@ jobs:
           cache-dependency-path: apps/mobile/package-lock.json
 
       - name: Install Mobile Dependencies
-        run: npm --prefix apps/mobile ci --legacy-peer-deps
+        working-directory: apps/mobile
+        run: npm ci --legacy-peer-deps
 
       - name: Static Typecheck & Unit Tests
+        working-directory: apps/mobile
         run: |
-          npm --prefix apps/mobile run typecheck
-          npm --prefix apps/mobile test
+          npm run typecheck
+          npm test
 
       - name: Generate Android Native Project (Expo Prebuild)
-        run: |
-          npx --prefix apps/mobile expo prebuild --platform android --no-install
+        working-directory: apps/mobile
+        run: npx expo prebuild --platform android --no-install
 
       - name: Create Release Signing Keystore
+        working-directory: apps/mobile/android/app
         run: |
           keytool -genkey -v \
-            -keystore apps/mobile/android/app/release.keystore \
+            -keystore release.keystore \
             -alias bengalsafety \
             -keyalg RSA \
             -keysize 2048 \
@@ -90,15 +96,15 @@ jobs:
 
       - name: Build Signed Android APK (Direct End-User Install)
         if: ${{ github.event.inputs.build_type == 'apk' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
+        working-directory: apps/mobile/android
         run: |
-          cd apps/mobile/android
           ./gradlew assembleRelease --no-daemon
           cp app/build/outputs/apk/release/app-release.apk ../../../bengal-safety-map.apk
 
       - name: Build Android AAB (Release Bundle for Google Play)
         if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
+        working-directory: apps/mobile/android
         run: |
-          cd apps/mobile/android
           ./gradlew bundleRelease --no-daemon
           cp app/build/outputs/bundle/release/app-release.aab ../../../bengal-safety-map.aab
 
