@@ -98,7 +98,7 @@ jobs:
                   f.write(app_content)
               print('Configured app/build.gradle signing successfully')
 
-          # 2. Configure root build.gradle for Kotlin 1.9.25 & Compose compiler compatibility
+          # 2. Configure root build.gradle for Kotlin 1.9.25
           root_gradle = 'apps/mobile/android/build.gradle'
           with open(root_gradle, 'r') as f:
               root_content = f.read()
@@ -114,25 +114,6 @@ jobs:
           if 'rootProject.ext.kotlinVersion' not in root_content:
               root_content = \"rootProject.ext.set('kotlinVersion', '1.9.25')\n\" + root_content
 
-          suppression_block = '''
-          subprojects {
-              afterEvaluate { project ->
-                  if (project.hasProperty('android')) {
-                      project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-                          kotlinOptions {
-                              freeCompilerArgs += [
-                                  '-P',
-                                  'plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true'
-                              ]
-                          }
-                      }
-                  }
-              }
-          }
-          '''
-          if 'suppressKotlinVersionCompatibilityCheck' not in root_content:
-              root_content += suppression_block
-
           with open(root_gradle, 'w') as f:
               f.write(root_content)
           print('Configured root build.gradle with Kotlin 1.9.25 successfully')
@@ -140,13 +121,7 @@ jobs:
           # 3. Configure gradle.properties
           props_path = 'apps/mobile/android/gradle.properties'
           with open(props_path, 'a') as f:
-              f.write('''
-          kotlinVersion=1.9.25
-          android.kotlinVersion=1.9.25
-          kotlin.suppressKotlinVersionCompatibilityCheck=true
-          android.suppressKotlinVersionCompatibilityCheck=true
-          composeCompiler.suppressKotlinVersionCompatibilityCheck=true
-          ''')
+              f.write('\nkotlinVersion=1.9.25\nandroid.kotlinVersion=1.9.25\nandroid.suppressKotlinVersionCompatibilityCheck=true\nkotlin.suppressKotlinVersionCompatibilityCheck=true\n')
           print('Configured gradle.properties successfully')
           "
 
