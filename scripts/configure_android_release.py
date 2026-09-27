@@ -30,7 +30,7 @@ def configure_app_gradle():
         abi {
             enable true
             reset()
-            include 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
+            include 'arm64-v8a'
             universalApk true
         }
     }
@@ -75,8 +75,23 @@ def configure_gradle_properties():
         print(f"Warning: {props_path} not found")
         return
 
-    with open(props_path, 'a') as f:
-        f.write("\nkotlinVersion=1.9.25\nandroid.kotlinVersion=1.9.25\nandroid.suppressKotlinVersionCompatibilityCheck=true\nkotlin.suppressKotlinVersionCompatibilityCheck=true\n")
+    with open(props_path, 'r') as f:
+        content = f.read()
+
+    # Increase heap memory from 2048m to 4096m to prevent Java heap space errors
+    content = content.replace('-Xmx2048m', '-Xmx4096m')
+    content = content.replace('-XX:MaxMetaspaceSize=512m', '-XX:MaxMetaspaceSize=1024m')
+
+    extra = """
+kotlinVersion=1.9.25
+android.kotlinVersion=1.9.25
+android.suppressKotlinVersionCompatibilityCheck=true
+kotlin.suppressKotlinVersionCompatibilityCheck=true
+"""
+    content += extra
+
+    with open(props_path, 'w') as f:
+        f.write(content)
     print("Successfully configured apps/mobile/android/gradle.properties")
 
 
