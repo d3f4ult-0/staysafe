@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-civic-50 text-civic-900 font-sans antialiased;
+  }
+}
+
+/* Custom styling for calm civic interface */
+.civic-card {
+  @apply bg-white border border-civic-200 rounded-lg shadow-sm;
+}
+
+.civic-badge {
+  @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+}
+
+/* MapLibre popup customization */
+.maplibregl-popup-content {
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}

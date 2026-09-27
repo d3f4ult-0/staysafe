@@ -1,0 +1,594 @@
+{
+  "dataset_release": {
+    "release_id": "synthetic_demo_v1",
+    "version": "1.0.0-demo",
+    "published_at": "2026-09-27T10:00:00Z",
+    "data_cutoff": "2026-09-26T23:59:59Z",
+    "is_synthetic": true,
+    "description": "Synthetic demonstration dataset for Bengal Safety Map pilot evaluation. All records and entities are fictional."
+  },
+  "sources": [
+    {
+      "id": "wb_pilot_synthetic_demo",
+      "name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "organization": "Civic Data Sandbox",
+      "source_type": "synthetic_demo",
+      "status": "synthetic_demo",
+      "canonical_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "license_terms": "Creative Commons Public Domain Dedication (CC0)",
+      "coverage_jurisdiction": "West Bengal (Pilot Municipalities)",
+      "coverage_period": "2026-01-01 to 2026-09-26",
+      "verification_status": "verified"
+    },
+    {
+      "id": "wb_police_public_notices",
+      "name": "State Police Public Safety Bulletins",
+      "organization": "West Bengal Police (Prospective Official Adapter)",
+      "source_type": "official",
+      "status": "unconfigured",
+      "canonical_url": "https://policewb.gov.in/notices",
+      "license_terms": "Open Government Data License - India",
+      "coverage_jurisdiction": "West Bengal",
+      "coverage_period": "Pending validation",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "wb_ecourts_dispositions",
+      "name": "Judicial Court Cause Lists & Dispositions",
+      "organization": "E-Courts India (Calcutta HC Jurisdiction)",
+      "source_type": "court",
+      "status": "unconfigured",
+      "canonical_url": "https://services.ecourts.gov.in",
+      "license_terms": "Judicial Public Domain / Permitted Citations",
+      "coverage_jurisdiction": "Kolkata & Subordinate Courts",
+      "coverage_period": "Pending validation",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "wb_state_statistical_handbook",
+      "name": "State Socio-Economic & Demographic Handbook",
+      "organization": "Bureau of Applied Economics and Statistics, WB",
+      "source_type": "official",
+      "status": "unconfigured",
+      "canonical_url": "http://wbpspm.gov.in",
+      "license_terms": "Open Government Data License - India",
+      "coverage_jurisdiction": "All 23 Districts of West Bengal",
+      "coverage_period": "Census 2011 & Projections",
+      "verification_status": "unverified"
+    }
+  ],
+  "administrative_areas": [
+    {
+      "id": "dist_kolkata",
+      "name": "Kolkata District",
+      "parent_id": null,
+      "area_type": "district",
+      "center_lat": 22.5697,
+      "center_lon": 88.3697,
+      "population_2011": 4496694
+    },
+    {
+      "id": "dist_north24parganas",
+      "name": "North 24 Parganas District",
+      "parent_id": null,
+      "area_type": "district",
+      "center_lat": 22.7185,
+      "center_lon": 88.4770,
+      "population_2011": 10009781
+    },
+    {
+      "id": "dist_howrah",
+      "name": "Howrah District",
+      "parent_id": null,
+      "area_type": "district",
+      "center_lat": 22.5958,
+      "center_lon": 88.2636,
+      "population_2011": 4850029
+    },
+    {
+      "id": "ward_kmc_central",
+      "name": "Kolkata Central Commercial Core (B.B.D. Bagh / Esplanade)",
+      "parent_id": "dist_kolkata",
+      "area_type": "ward",
+      "center_lat": 22.5718,
+      "center_lon": 88.3512,
+      "population_2011": 72400
+    },
+    {
+      "id": "ward_kmc_north",
+      "name": "Kolkata North Heritage Zone (Shyambazar / Hatibagan)",
+      "parent_id": "dist_kolkata",
+      "area_type": "ward",
+      "center_lat": 22.6015,
+      "center_lon": 88.3712,
+      "population_2011": 95100
+    },
+    {
+      "id": "ward_kmc_south",
+      "name": "Kolkata South Residential Hub (Ballygunge / Gariahat)",
+      "parent_id": "dist_kolkata",
+      "area_type": "ward",
+      "center_lat": 22.5280,
+      "center_lon": 88.3650,
+      "population_2011": 112000
+    },
+    {
+      "id": "ward_kmc_port",
+      "name": "Kolkata Port & Kidderpore Zone",
+      "parent_id": "dist_kolkata",
+      "area_type": "ward",
+      "center_lat": 22.5350,
+      "center_lon": 88.3200,
+      "population_2011": 84200
+    },
+    {
+      "id": "ward_saltlake_sector5",
+      "name": "Bidhannagar Sector V IT & Electronics Hub",
+      "parent_id": "dist_north24parganas",
+      "area_type": "ward",
+      "center_lat": 22.5768,
+      "center_lon": 88.4344,
+      "population_2011": 45000
+    },
+    {
+      "id": "ward_newtown_actionarea1",
+      "name": "New Town Action Area 1",
+      "parent_id": "dist_north24parganas",
+      "area_type": "ward",
+      "center_lat": 22.5890,
+      "center_lon": 88.4720,
+      "population_2011": 38000
+    },
+    {
+      "id": "ward_howrah_station",
+      "name": "Howrah Station & Riverfront Zone",
+      "parent_id": "dist_howrah",
+      "area_type": "ward",
+      "center_lat": 22.5860,
+      "center_lon": 88.3410,
+      "population_2011": 68000
+    }
+  ],
+  "cases": [
+    {
+      "public_id": "CASE-2026-001",
+      "category_code": "property_theft",
+      "administrative_area_id": "ward_kmc_central",
+      "disclaimer": "This timeline records publicly documented procedural milestones. An allegation, FIR, or charge is not evidence of guilt.",
+      "timeline": [
+        {
+          "event_order": 1,
+          "status": "reported",
+          "effective_date": "2026-02-10T14:30:00Z",
+          "effective_date_precision": "exact",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Public report of commercial equipment theft from warehouse dock.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 2,
+          "status": "fir_registered",
+          "effective_date": "2026-02-11T10:00:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "First Information Report formally registered under Section 303 BNS (Theft).",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 3,
+          "status": "investigation",
+          "effective_date": "2026-03-01T09:00:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Investigative inquiry initiated with inventory reconciliation.",
+          "is_guilt_finding": false
+        }
+      ]
+    },
+    {
+      "public_id": "CASE-2026-002",
+      "category_code": "assault_physical_violence",
+      "administrative_area_id": "ward_howrah_station",
+      "disclaimer": "This timeline records publicly documented procedural milestones. An allegation, FIR, or charge is not evidence of guilt.",
+      "timeline": [
+        {
+          "event_order": 1,
+          "status": "reported",
+          "effective_date": "2026-01-15T22:45:00Z",
+          "effective_date_precision": "exact",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Public disturbance altercation reported near transit forecourt.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 2,
+          "status": "fir_registered",
+          "effective_date": "2026-01-16T08:00:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "FIR recorded under Section 115 BNS (Voluntarily causing hurt).",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 3,
+          "status": "chargesheet",
+          "effective_date": "2026-04-12T11:00:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Investigating officer filed police report / chargesheet in local magistrate court.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 4,
+          "status": "trial",
+          "effective_date": "2026-05-20T10:30:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Judicial trial proceedings commenced before Judicial Magistrate First Class.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 5,
+          "status": "acquitted",
+          "effective_date": "2026-08-14T15:00:00Z",
+          "effective_date_precision": "exact",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Court-recorded final judgment: Acquittal recorded due to contradictory witness testimony. Accused person discharged.",
+          "is_guilt_finding": false
+        }
+      ]
+    },
+    {
+      "public_id": "CASE-2026-003",
+      "category_code": "traffic_road_safety",
+      "administrative_area_id": "ward_saltlake_sector5",
+      "disclaimer": "This timeline records publicly documented procedural milestones. An allegation, FIR, or charge is not evidence of guilt.",
+      "timeline": [
+        {
+          "event_order": 1,
+          "status": "reported",
+          "effective_date": "2026-03-22T01:15:00Z",
+          "effective_date_precision": "exact",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Vehicle collision with divider reported on arterial crossover at night.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 2,
+          "status": "fir_registered",
+          "effective_date": "2026-03-22T06:00:00Z",
+          "effective_date_precision": "exact",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "FIR filed under Section 281 BNS (Rash driving on a public way).",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 3,
+          "status": "chargesheet",
+          "effective_date": "2026-06-10T12:00:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Chargesheet submitted following mechanical inspection report.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 4,
+          "status": "convicted",
+          "effective_date": "2026-09-02T14:30:00Z",
+          "effective_date_precision": "exact",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Court judgment: Driver pled guilty to speeding; sentenced to statutory fine under Motor Vehicles Act.",
+          "is_guilt_finding": true
+        }
+      ]
+    },
+    {
+      "public_id": "CASE-2026-004",
+      "category_code": "sexual_offenses_harassment",
+      "administrative_area_id": "dist_kolkata",
+      "disclaimer": "Strict privacy suppression applied. Under statutory policy, no coordinates or identifying details are displayed.",
+      "timeline": [
+        {
+          "event_order": 1,
+          "status": "reported",
+          "effective_date": "2026-04-05T21:00:00Z",
+          "effective_date_precision": "hour_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "Public safety report of street harassment recorded; coordinates generalized to district boundary.",
+          "is_guilt_finding": false
+        },
+        {
+          "event_order": 2,
+          "status": "fir_registered",
+          "effective_date": "2026-04-06T11:00:00Z",
+          "effective_date_precision": "date_only",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_excerpt": "FIR registered under Section 74 BNS. Identity protected by statute.",
+          "is_guilt_finding": false
+        }
+      ]
+    }
+  ],
+  "incidents": [
+    {
+      "public_id": "INC-2026-101",
+      "category_code": "property_theft",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-02-10T14:30:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-02-10T16:00:00+05:30",
+      "latitude": 22.5720,
+      "longitude": 88.3515,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_central",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": "CASE-2026-001"
+    },
+    {
+      "public_id": "INC-2026-102",
+      "category_code": "assault_physical_violence",
+      "sensitivity_tier": "high",
+      "occurred_at": "2026-01-15T22:45:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-01-16T02:00:00+05:30",
+      "latitude": 22.5855,
+      "longitude": 88.3415,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_howrah_station",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": "CASE-2026-002"
+    },
+    {
+      "public_id": "INC-2026-103",
+      "category_code": "traffic_road_safety",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-03-22T01:15:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-03-22T03:00:00+05:30",
+      "latitude": 22.5765,
+      "longitude": 88.4340,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_saltlake_sector5",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": "CASE-2026-003"
+    },
+    {
+      "public_id": "INC-2026-104",
+      "category_code": "sexual_offenses_harassment",
+      "sensitivity_tier": "critical",
+      "occurred_at": "2026-04-05T21:00:00+05:30",
+      "occurred_time_precision": "hour_only",
+      "is_night": true,
+      "reported_at": "2026-04-06T10:00:00+05:30",
+      "latitude": null,
+      "longitude": null,
+      "spatial_precision": "exact_suppressed",
+      "administrative_area_id": "dist_kolkata",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": "CASE-2026-004"
+    },
+    {
+      "public_id": "INC-2026-105",
+      "category_code": "property_theft",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-05-18T00:00:00+05:30",
+      "occurred_time_precision": "date_only",
+      "is_night": null,
+      "reported_at": "2026-05-19T09:00:00+05:30",
+      "latitude": 22.6010,
+      "longitude": 88.3710,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_north",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-106",
+      "category_code": "public_disturbance",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-06-12T23:30:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-06-13T01:00:00+05:30",
+      "latitude": 22.5285,
+      "longitude": 88.3655,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_south",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-107",
+      "category_code": "substance_narcotics",
+      "sensitivity_tier": "high",
+      "occurred_at": "2026-07-04T19:40:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-07-04T21:00:00+05:30",
+      "latitude": 22.5355,
+      "longitude": 88.3205,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_port",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-108",
+      "category_code": "traffic_road_safety",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-08-20T21:45:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-08-20T22:30:00+05:30",
+      "latitude": 22.5895,
+      "longitude": 88.4725,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_newtown_actionarea1",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-109",
+      "category_code": "financial_fraud_cyber",
+      "sensitivity_tier": "standard",
+      "occurred_at": null,
+      "occurred_time_precision": "unknown",
+      "is_night": null,
+      "reported_at": "2026-08-25T11:00:00+05:30",
+      "latitude": 22.5760,
+      "longitude": 88.4350,
+      "spatial_precision": "ward_centroid",
+      "administrative_area_id": "ward_saltlake_sector5",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-110",
+      "category_code": "property_theft",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-01T03:15:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-01T08:00:00+05:30",
+      "latitude": 22.5715,
+      "longitude": 88.3510,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_central",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-111",
+      "category_code": "assault_physical_violence",
+      "sensitivity_tier": "high",
+      "occurred_at": "2026-09-05T16:00:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-09-05T17:30:00+05:30",
+      "latitude": 22.5862,
+      "longitude": 88.3412,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_howrah_station",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-112",
+      "category_code": "public_disturbance",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-10T22:15:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-10T23:00:00+05:30",
+      "latitude": 22.6020,
+      "longitude": 88.3715,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_north",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-113",
+      "category_code": "traffic_road_safety",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-12T08:30:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-09-12T09:00:00+05:30",
+      "latitude": 22.5282,
+      "longitude": 88.3652,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_south",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-114",
+      "category_code": "property_theft",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-15T21:10:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-16T08:00:00+05:30",
+      "latitude": 22.5772,
+      "longitude": 88.4348,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_saltlake_sector5",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-115",
+      "category_code": "traffic_road_safety",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-18T23:50:00+05:30",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-19T00:30:00+05:30",
+      "latitude": 22.5892,
+      "longitude": 88.4722,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_newtown_actionarea1",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-116",
+      "category_code": "property_theft",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-20T12:00:00+05:30",
+      "occurred_time_precision": "hour_only",
+      "is_night": false,
+      "reported_at": "2026-09-20T13:30:00+05:30",
+      "latitude": 22.5719,
+      "longitude": 88.3514,
+      "spatial_precision": "hex_500m",
+      "administrative_area_id": "ward_kmc_central",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-117",
+      "category_code": "domestic_violence_family",
+      "sensitivity_tier": "critical",
+      "occurred_at": "2026-09-22T00:00:00+05:30",
+      "occurred_time_precision": "date_only",
+      "is_night": null,
+      "reported_at": "2026-09-22T14:00:00+05:30",
+      "latitude": null,
+      "longitude": null,
+      "spatial_precision": "exact_suppressed",
+      "administrative_area_id": "dist_north24parganas",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    },
+    {
+      "public_id": "INC-2026-118",
+      "category_code": "offenses_against_minors",
+      "sensitivity_tier": "critical",
+      "occurred_at": null,
+      "occurred_time_precision": "unknown",
+      "is_night": null,
+      "reported_at": "2026-09-24T10:00:00+05:30",
+      "latitude": null,
+      "longitude": null,
+      "spatial_precision": "exact_suppressed",
+      "administrative_area_id": "dist_howrah",
+      "source_id": "wb_pilot_synthetic_demo",
+      "case_public_id": null
+    }
+  ],
+  "deduplication_clusters": [
+    {
+      "cluster_id": "DEDUP-2026-C01",
+      "master_record_id": "INC-2026-101",
+      "candidate_record_id": "RAW-STAGE-902",
+      "match_confidence": 0.88,
+      "match_reasons": ["same_ward_geometry", "same_date", "identical_category_theft"],
+      "review_status": "pending_operator_review"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#1e3a8a"/>
+  <!-- Map Shield Emblem -->
+  <path d="M256 96 L384 144 V264 C384 340 328 400 256 424 C184 400 128 340 128 264 V144 Z" fill="#0d9488" opacity="0.9"/>
+  <circle cx="256" cy="240" r="48" fill="#f8fafc"/>
+  <circle cx="256" cy="240" r="24" fill="#1e3a8a"/>
+  <!-- Crescent moon indicating night-time lens -->
+  <path d="M304 180 A32 32 0 0 1 270 220 A36 36 0 0 0 304 180 Z" fill="#f59e0b"/>
+</svg>

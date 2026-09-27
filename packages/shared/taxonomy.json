@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "categories": [
+    {
+      "code": "property_theft",
+      "name": "Property Theft & Burglary",
+      "parent_code": null,
+      "sensitivity_tier": "standard",
+      "spatial_policy": "cluster_250m",
+      "description": "Unlawful taking of personal or commercial property without direct interpersonal violence."
+    },
+    {
+      "code": "traffic_road_safety",
+      "name": "Road & Traffic Safety Incident",
+      "parent_code": null,
+      "sensitivity_tier": "standard",
+      "spatial_policy": "cluster_250m",
+      "description": "Reported road traffic hazards, hit-and-run, reckless vehicular incidents, or severe transit disruptions."
+    },
+    {
+      "code": "public_disturbance",
+      "name": "Public Disturbance & Affray",
+      "parent_code": null,
+      "sensitivity_tier": "standard",
+      "spatial_policy": "hex_500m",
+      "description": "Disorderly conduct, localized brawl, or disturbance of public peace in public spaces."
+    },
+    {
+      "code": "substance_narcotics",
+      "name": "Substance & Contraband Offense",
+      "parent_code": null,
+      "sensitivity_tier": "high",
+      "spatial_policy": "hex_500m",
+      "description": "Reported seizure or illegal trade of controlled illicit substances."
+    },
+    {
+      "code": "financial_fraud_cyber",
+      "name": "Cyber & Financial Fraud",
+      "parent_code": null,
+      "sensitivity_tier": "standard",
+      "spatial_policy": "ward_centroid",
+      "description": "Reported electronic banking fraud, online impersonation, or deceptive financial scams."
+    },
+    {
+      "code": "assault_physical_violence",
+      "name": "Physical Assault & Hurt",
+      "parent_code": null,
+      "sensitivity_tier": "high",
+      "spatial_policy": "hex_500m",
+      "description": "Physical interpersonal violence, simple or grievous hurt, or altercation involving weapons."
+    },
+    {
+      "code": "sexual_offenses_harassment",
+      "name": "Sexual Harassment & Offenses",
+      "parent_code": null,
+      "sensitivity_tier": "critical",
+      "spatial_policy": "strict_suppression",
+      "description": "Reported sexual harassment, stalking, or assault. Under strict privacy policy, exact coordinates are NEVER published; aggregates only at Ward or District level."
+    },
+    {
+      "code": "domestic_violence_family",
+      "name": "Domestic & Intimate Partner Violence",
+      "parent_code": null,
+      "sensitivity_tier": "critical",
+      "spatial_policy": "strict_suppression",
+      "description": "Household cruelty, matrimonial dispute, or domestic violence. Strict suppression: zero coordinate pins, aggregated only."
+    },
+    {
+      "code": "offenses_against_minors",
+      "name": "Offenses Against Children (POCSO)",
+      "parent_code": null,
+      "sensitivity_tier": "critical",
+      "spatial_policy": "strict_suppression",
+      "description": "Incidents involving juveniles or minors. Strict suppression: zero coordinate pins, aggregated only at district level."
+    }
+  ]
+}

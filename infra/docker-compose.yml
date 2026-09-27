@@ -1,0 +1,63 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: bengal_safety_map_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-bengal_safety_map}
+    ports:
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bengal_safety_map"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: bengal_safety_map_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.api
+    container_name: bengal_safety_map_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/bengal_safety_map
+      PILOT_AREA_CODE: kolkata_metro
+      PILOT_AREA_NAME: "Greater Kolkata Pilot (KMC, Bidhannagar, Howrah, New Town)"
+      PILOT_CENTER_LAT: 22.5726
+      PILOT_CENTER_LON: 88.3639
+      PILOT_DEFAULT_ZOOM: 12
+      NIGHT_START_HOUR: 20
+      NIGHT_END_HOUR: 5
+      MIN_AGGREGATE_COUNT: 5
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.web
+    container_name: bengal_safety_map_web
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      INTERNAL_API_URL: http://api:8000
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:
