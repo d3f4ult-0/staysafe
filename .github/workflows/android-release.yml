@@ -34,8 +34,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Setup Android SDK Environment
+        run: |
+          echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -98,6 +100,7 @@ jobs:
         if: ${{ github.event.inputs.build_type == 'apk' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
         working-directory: apps/mobile/android
         run: |
+          chmod +x ./gradlew
           ./gradlew assembleRelease --no-daemon
           cp app/build/outputs/apk/release/app-release.apk ../../../bengal-safety-map.apk
 
@@ -105,6 +108,7 @@ jobs:
         if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
         working-directory: apps/mobile/android
         run: |
+          chmod +x ./gradlew
           ./gradlew bundleRelease --no-daemon
           cp app/build/outputs/bundle/release/app-release.aab ../../../bengal-safety-map.aab
 
