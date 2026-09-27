@@ -26,7 +26,7 @@ import {
 
 export default function OfflineScreen() {
   const queryClient = useQueryClient();
-  const { isOfflineMode, setIsOfflineMode } = useAppStore();
+  const { dataMode, setDataMode, isOfflineSimulated, setIsOfflineSimulated } = useAppStore();
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
 
   // Fetch available server packages
@@ -78,28 +78,35 @@ export default function OfflineScreen() {
   };
 
   const isStale = localPackage ? offlineStorage.isPackageStale(localPackage) : false;
+  const isOffline = dataMode === 'demo' || isOfflineSimulated;
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
       {/* Offline Status Banner */}
-      <View style={[styles.statusCard, isOfflineMode ? styles.statusOffline : styles.statusOnline]}>
+      <View style={[styles.statusCard, isOffline ? styles.statusOffline : styles.statusOnline]}>
         <View style={styles.statusHeader}>
-          <HardDrive size={16} color={isOfflineMode ? '#92400e' : '#1e3a8a'} />
-          <Text style={[styles.statusTitle, isOfflineMode ? styles.textOffline : styles.textOnline]}>
-            {isOfflineMode ? 'Active Mode: Offline-First' : 'Active Mode: Connected (Live API)'}
+          <HardDrive size={16} color={isOffline ? '#92400e' : '#1e3a8a'} />
+          <Text style={[styles.statusTitle, isOffline ? styles.textOffline : styles.textOnline]}>
+            {isOffline ? 'Active Mode: Built-in Offline Demo' : 'Active Mode: Connected (Live API)'}
           </Text>
         </View>
         <Text style={styles.statusDesc}>
-          {isOfflineMode
+          {isOffline
             ? 'The app is currently relying solely on locally stored bundles. No network requests are dispatched.'
             : 'The app connects directly to the Bengal Safety Map API for live spatial and incident queries.'}
         </Text>
         <TouchableOpacity
-          style={[styles.toggleBtn, isOfflineMode ? styles.toggleBtnActive : styles.toggleBtnInactive]}
-          onPress={() => setIsOfflineMode(!isOfflineMode)}
+          style={[styles.toggleBtn, isOffline ? styles.toggleBtnActive : styles.toggleBtnInactive]}
+          onPress={() => {
+            if (dataMode === 'demo') {
+              setDataMode('connected');
+            } else {
+              setIsOfflineSimulated(!isOfflineSimulated);
+            }
+          }}
         >
-          <Text style={[styles.toggleBtnText, isOfflineMode ? styles.toggleBtnTextActive : styles.toggleBtnTextInactive]}>
-            {isOfflineMode ? 'Switch to Live API Mode' : 'Simulate Offline Mode'}
+          <Text style={[styles.toggleBtnText, isOffline ? styles.toggleBtnTextActive : styles.toggleBtnTextInactive]}>
+            {isOffline ? 'Switch to Live API Mode' : 'Simulate Offline Mode'}
           </Text>
         </TouchableOpacity>
       </View>

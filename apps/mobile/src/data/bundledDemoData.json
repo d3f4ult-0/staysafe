@@ -1,0 +1,1684 @@
+{
+  "metadata": {
+    "app_name": "Bengal Safety Map",
+    "version": "1.0.0",
+    "environment": "development",
+    "active_release_version": "synthetic_demo_v1",
+    "data_cutoff": "2026-09-26T23:59:59Z",
+    "pilot_area": {
+      "area_code": "kolkata_metro",
+      "area_name": "Greater Kolkata Pilot (KMC, Bidhannagar, Howrah, New Town)",
+      "center_lat": 22.5726,
+      "center_lon": 88.3639,
+      "default_zoom": 12,
+      "bbox": [
+        88.2,
+        22.4,
+        88.55,
+        22.7
+      ]
+    },
+    "temporal_policy": {
+      "timezone": "Asia/Kolkata",
+      "night_start_hour": 20,
+      "night_end_hour": 5,
+      "night_definition_label": "20:00 - 05:00 IST",
+      "missing_time_policy": "Never inferred from publication timestamp; classified as unknown_occurrence_time."
+    },
+    "disclaimer": "Transparent public-interest mapping tool for publicly reported safety incidents in West Bengal. Data points and aggregates represent reported/publicly available records and do NOT predict individual danger or rate neighborhoods as safe or unsafe.",
+    "emergency_notice": "EMERGENCY NOTICE: If you are in immediate danger, do NOT rely on this application. Contact official emergency services immediately via National Emergency Helpline: 112.",
+    "privacy_safeguards": {
+      "pii_retention": "Zero direct PII stored in public models",
+      "k_anonymity_threshold": 5,
+      "sensitive_categories_spatial_suppression": "Strict suppression for Sexual Offenses, POCSO, Domestic Violence (zero coordinate pins)"
+    }
+  },
+  "sources": [
+    {
+      "id": "wb_pilot_synthetic_demo",
+      "name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "organization": "Civic Data Sandbox",
+      "source_type": "synthetic_demo",
+      "status": "synthetic_demo",
+      "canonical_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "license_terms": "Creative Commons Public Domain Dedication (CC0)",
+      "coverage_jurisdiction": "West Bengal (Pilot Municipalities)",
+      "coverage_period": "2026-01-01 to 2026-09-26",
+      "verification_status": "verified"
+    },
+    {
+      "id": "wb_police_public_notices",
+      "name": "State Police Public Safety Bulletins",
+      "organization": "West Bengal Police (Prospective Official Adapter)",
+      "source_type": "official",
+      "status": "unconfigured",
+      "canonical_url": "https://policewb.gov.in/notices",
+      "license_terms": "Open Government Data License - India",
+      "coverage_jurisdiction": "West Bengal",
+      "coverage_period": "Pending validation",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "wb_ecourts_dispositions",
+      "name": "Judicial Court Cause Lists & Dispositions",
+      "organization": "E-Courts India (Calcutta HC Jurisdiction)",
+      "source_type": "court",
+      "status": "unconfigured",
+      "canonical_url": "https://services.ecourts.gov.in",
+      "license_terms": "Judicial Public Domain / Permitted Citations",
+      "coverage_jurisdiction": "Kolkata & Subordinate Courts",
+      "coverage_period": "Pending validation",
+      "verification_status": "unverified"
+    },
+    {
+      "id": "wb_state_statistical_handbook",
+      "name": "State Socio-Economic & Demographic Handbook",
+      "organization": "Bureau of Applied Economics and Statistics, WB",
+      "source_type": "official",
+      "status": "unconfigured",
+      "canonical_url": "http://wbpspm.gov.in",
+      "license_terms": "Open Government Data License - India",
+      "coverage_jurisdiction": "All 23 Districts of West Bengal",
+      "coverage_period": "Census 2011 & Projections",
+      "verification_status": "unverified"
+    }
+  ],
+  "incidents": [
+    {
+      "public_id": "INC-2026-117",
+      "category_code": "domestic_violence_family",
+      "category_name": "Domestic & Intimate Partner Violence",
+      "sensitivity_tier": "critical",
+      "occurred_at": "2026-09-21T18:30:00Z",
+      "occurred_time_precision": "date_only",
+      "is_night": null,
+      "reported_at": "2026-09-22T08:30:00Z",
+      "published_at": null,
+      "latitude": null,
+      "longitude": null,
+      "spatial_precision": "exact_suppressed",
+      "administrative_area_name": "North 24 Parganas District",
+      "district_name": "North 24 Parganas District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-116",
+      "category_code": "property_theft",
+      "category_name": "Property Theft & Burglary",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-20T06:30:00Z",
+      "occurred_time_precision": "hour_only",
+      "is_night": false,
+      "reported_at": "2026-09-20T08:00:00Z",
+      "published_at": null,
+      "latitude": 22.572,
+      "longitude": 88.351,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata Central Commercial Core (B.B.D. Bagh / Esplanade)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-115",
+      "category_code": "traffic_road_safety",
+      "category_name": "Road & Traffic Safety Incident",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-18T18:20:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-18T19:00:00Z",
+      "published_at": null,
+      "latitude": 22.589,
+      "longitude": 88.472,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "New Town Action Area 1",
+      "district_name": "North 24 Parganas District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-114",
+      "category_code": "property_theft",
+      "category_name": "Property Theft & Burglary",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-15T15:40:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-16T02:30:00Z",
+      "published_at": null,
+      "latitude": 22.577,
+      "longitude": 88.435,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Bidhannagar Sector V IT & Electronics Hub",
+      "district_name": "North 24 Parganas District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-113",
+      "category_code": "traffic_road_safety",
+      "category_name": "Road & Traffic Safety Incident",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-12T03:00:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-09-12T03:30:00Z",
+      "published_at": null,
+      "latitude": 22.528,
+      "longitude": 88.365,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata South Residential Hub (Ballygunge / Gariahat)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-112",
+      "category_code": "public_disturbance",
+      "category_name": "Public Disturbance & Affray",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-09-10T16:45:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-10T17:30:00Z",
+      "published_at": null,
+      "latitude": 22.602,
+      "longitude": 88.371,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata North Heritage Zone (Shyambazar / Hatibagan)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-111",
+      "category_code": "assault_physical_violence",
+      "category_name": "Physical Assault & Hurt",
+      "sensitivity_tier": "high",
+      "occurred_at": "2026-09-05T10:30:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-09-05T12:00:00Z",
+      "published_at": null,
+      "latitude": 22.586,
+      "longitude": 88.341,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Howrah Station & Riverfront Zone",
+      "district_name": "Howrah District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-110",
+      "category_code": "property_theft",
+      "category_name": "Property Theft & Burglary",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-08-31T21:45:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-09-01T02:30:00Z",
+      "published_at": null,
+      "latitude": 22.572,
+      "longitude": 88.351,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata Central Commercial Core (B.B.D. Bagh / Esplanade)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-108",
+      "category_code": "traffic_road_safety",
+      "category_name": "Road & Traffic Safety Incident",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-08-20T16:15:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-08-20T17:00:00Z",
+      "published_at": null,
+      "latitude": 22.59,
+      "longitude": 88.472,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "New Town Action Area 1",
+      "district_name": "North 24 Parganas District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-107",
+      "category_code": "substance_narcotics",
+      "category_name": "Substance & Contraband Offense",
+      "sensitivity_tier": "high",
+      "occurred_at": "2026-07-04T14:10:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-07-04T15:30:00Z",
+      "published_at": null,
+      "latitude": 22.535,
+      "longitude": 88.32,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata Port & Kidderpore Zone",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-106",
+      "category_code": "public_disturbance",
+      "category_name": "Public Disturbance & Affray",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-06-12T18:00:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-06-12T19:30:00Z",
+      "published_at": null,
+      "latitude": 22.529,
+      "longitude": 88.365,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata South Residential Hub (Ballygunge / Gariahat)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-105",
+      "category_code": "property_theft",
+      "category_name": "Property Theft & Burglary",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-05-17T18:30:00Z",
+      "occurred_time_precision": "date_only",
+      "is_night": null,
+      "reported_at": "2026-05-19T03:30:00Z",
+      "published_at": null,
+      "latitude": 22.601,
+      "longitude": 88.371,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata North Heritage Zone (Shyambazar / Hatibagan)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-104",
+      "category_code": "sexual_offenses_harassment",
+      "category_name": "Sexual Harassment & Offenses",
+      "sensitivity_tier": "critical",
+      "occurred_at": "2026-04-05T15:30:00Z",
+      "occurred_time_precision": "hour_only",
+      "is_night": true,
+      "reported_at": "2026-04-06T04:30:00Z",
+      "published_at": null,
+      "latitude": null,
+      "longitude": null,
+      "spatial_precision": "exact_suppressed",
+      "administrative_area_name": "Kolkata District",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": true,
+      "case_public_id": "CASE-2026-004",
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-103",
+      "category_code": "traffic_road_safety",
+      "category_name": "Road & Traffic Safety Incident",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-03-21T19:45:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-03-21T21:30:00Z",
+      "published_at": null,
+      "latitude": 22.576,
+      "longitude": 88.434,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Bidhannagar Sector V IT & Electronics Hub",
+      "district_name": "North 24 Parganas District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": true,
+      "case_public_id": "CASE-2026-003",
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-101",
+      "category_code": "property_theft",
+      "category_name": "Property Theft & Burglary",
+      "sensitivity_tier": "standard",
+      "occurred_at": "2026-02-10T09:00:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": false,
+      "reported_at": "2026-02-10T10:30:00Z",
+      "published_at": null,
+      "latitude": 22.572,
+      "longitude": 88.352,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Kolkata Central Commercial Core (B.B.D. Bagh / Esplanade)",
+      "district_name": "Kolkata District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": true,
+      "case_public_id": "CASE-2026-001",
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-102",
+      "category_code": "assault_physical_violence",
+      "category_name": "Physical Assault & Hurt",
+      "sensitivity_tier": "high",
+      "occurred_at": "2026-01-15T17:15:00Z",
+      "occurred_time_precision": "exact",
+      "is_night": true,
+      "reported_at": "2026-01-15T20:30:00Z",
+      "published_at": null,
+      "latitude": 22.585,
+      "longitude": 88.341,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Howrah Station & Riverfront Zone",
+      "district_name": "Howrah District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": true,
+      "case_public_id": "CASE-2026-002",
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-109",
+      "category_code": "financial_fraud_cyber",
+      "category_name": "Cyber & Financial Fraud",
+      "sensitivity_tier": "standard",
+      "occurred_at": null,
+      "occurred_time_precision": "unknown",
+      "is_night": null,
+      "reported_at": "2026-08-25T05:30:00Z",
+      "published_at": null,
+      "latitude": 22.576,
+      "longitude": 88.435,
+      "spatial_precision": "hex_500m",
+      "administrative_area_name": "Bidhannagar Sector V IT & Electronics Hub",
+      "district_name": "North 24 Parganas District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    },
+    {
+      "public_id": "INC-2026-118",
+      "category_code": "offenses_against_minors",
+      "category_name": "Offenses Against Children (POCSO)",
+      "sensitivity_tier": "critical",
+      "occurred_at": null,
+      "occurred_time_precision": "unknown",
+      "is_night": null,
+      "reported_at": "2026-09-24T04:30:00Z",
+      "published_at": null,
+      "latitude": null,
+      "longitude": null,
+      "spatial_precision": "exact_suppressed",
+      "administrative_area_name": "Howrah District",
+      "district_name": "Howrah District",
+      "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+      "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+      "source_verification": "verified",
+      "has_case_timeline": false,
+      "case_public_id": null,
+      "is_synthetic": true
+    }
+  ],
+  "total_incidents": 18,
+  "aggregates": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "id": "agg_ward_kmc_central",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.3512,
+            22.5718
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_kmc_central",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 0,
+          "is_suppressed": true,
+          "dominant_category": "property_theft"
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "agg_ward_kmc_north",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.3712,
+            22.6015
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_kmc_north",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 1,
+          "is_suppressed": true,
+          "dominant_category": "property_theft"
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "agg_ward_kmc_south",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.365,
+            22.528
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_kmc_south",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 0,
+          "is_suppressed": true,
+          "dominant_category": "public_disturbance"
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "agg_ward_kmc_port",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.32,
+            22.535
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_kmc_port",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 0,
+          "is_suppressed": true,
+          "dominant_category": "substance_narcotics"
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "agg_ward_saltlake_sector5",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.4344,
+            22.5768
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_saltlake_sector5",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 1,
+          "is_suppressed": true,
+          "dominant_category": "traffic_road_safety"
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "agg_ward_newtown_actionarea1",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.472,
+            22.589
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_newtown_actionarea1",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 0,
+          "is_suppressed": true,
+          "dominant_category": "traffic_road_safety"
+        }
+      },
+      {
+        "type": "Feature",
+        "id": "agg_ward_howrah_station",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            88.341,
+            22.586
+          ]
+        },
+        "properties": {
+          "cell_id": "cell_ward_howrah_station",
+          "total_count": "<5",
+          "night_count": "<5",
+          "day_count": "<5",
+          "unknown_time_count": 0,
+          "is_suppressed": true,
+          "dominant_category": "assault_physical_violence"
+        }
+      }
+    ],
+    "metadata": {
+      "time_filter": "all",
+      "category_filter": "all",
+      "small_cell_threshold": 5,
+      "total_cells": 7,
+      "suppressed_cells": 7,
+      "disclaimer": "Aggregates represent reported incidents and do not predict individual danger."
+    }
+  },
+  "area_summaries": {
+    "ward_kmc_central": {
+      "area_id": "ward_kmc_central",
+      "area_name": "Kolkata Central Commercial Core (B.B.D. Bagh / Esplanade)",
+      "area_type": "ward",
+      "district_name": "Kolkata District",
+      "total_records": 3,
+      "night_records": 1,
+      "day_records": 2,
+      "unknown_time_records": 0,
+      "night_time_share_pct": 33.3,
+      "unknown_time_pct": 0.0,
+      "available_court_outcomes_count": 0,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (72,400 residents)",
+      "rate_per_capita": 4.14,
+      "uncertainty_notes": [],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    },
+    "ward_kmc_north": {
+      "area_id": "ward_kmc_north",
+      "area_name": "Kolkata North Heritage Zone (Shyambazar / Hatibagan)",
+      "area_type": "ward",
+      "district_name": "Kolkata District",
+      "total_records": 2,
+      "night_records": 1,
+      "day_records": 0,
+      "unknown_time_records": 1,
+      "night_time_share_pct": 100.0,
+      "unknown_time_pct": 50.0,
+      "available_court_outcomes_count": 0,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (95,100 residents)",
+      "rate_per_capita": 2.1,
+      "uncertainty_notes": [
+        "Significant temporal missingness: 50.0% of records lack exact occurrence time."
+      ],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    },
+    "ward_kmc_south": {
+      "area_id": "ward_kmc_south",
+      "area_name": "Kolkata South Residential Hub (Ballygunge / Gariahat)",
+      "area_type": "ward",
+      "district_name": "Kolkata District",
+      "total_records": 2,
+      "night_records": 1,
+      "day_records": 1,
+      "unknown_time_records": 0,
+      "night_time_share_pct": 50.0,
+      "unknown_time_pct": 0.0,
+      "available_court_outcomes_count": 0,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (112,000 residents)",
+      "rate_per_capita": 1.79,
+      "uncertainty_notes": [],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    },
+    "ward_kmc_port": {
+      "area_id": "ward_kmc_port",
+      "area_name": "Kolkata Port & Kidderpore Zone",
+      "area_type": "ward",
+      "district_name": "Kolkata District",
+      "total_records": 1,
+      "night_records": 0,
+      "day_records": 1,
+      "unknown_time_records": 0,
+      "night_time_share_pct": 0.0,
+      "unknown_time_pct": 0.0,
+      "available_court_outcomes_count": 0,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (84,200 residents)",
+      "rate_per_capita": 1.19,
+      "uncertainty_notes": [],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    },
+    "ward_saltlake_sector5": {
+      "area_id": "ward_saltlake_sector5",
+      "area_name": "Bidhannagar Sector V IT & Electronics Hub",
+      "area_type": "ward",
+      "district_name": "North 24 Parganas District",
+      "total_records": 3,
+      "night_records": 2,
+      "day_records": 0,
+      "unknown_time_records": 1,
+      "night_time_share_pct": 100.0,
+      "unknown_time_pct": 33.3,
+      "available_court_outcomes_count": 1,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (45,000 residents)",
+      "rate_per_capita": 6.67,
+      "uncertainty_notes": [
+        "Significant temporal missingness: 33.3% of records lack exact occurrence time."
+      ],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    },
+    "ward_newtown_actionarea1": {
+      "area_id": "ward_newtown_actionarea1",
+      "area_name": "New Town Action Area 1",
+      "area_type": "ward",
+      "district_name": "North 24 Parganas District",
+      "total_records": 2,
+      "night_records": 2,
+      "day_records": 0,
+      "unknown_time_records": 0,
+      "night_time_share_pct": 100.0,
+      "unknown_time_pct": 0.0,
+      "available_court_outcomes_count": 0,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (38,000 residents)",
+      "rate_per_capita": 5.26,
+      "uncertainty_notes": [],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    },
+    "ward_howrah_station": {
+      "area_id": "ward_howrah_station",
+      "area_name": "Howrah Station & Riverfront Zone",
+      "area_type": "ward",
+      "district_name": "Howrah District",
+      "total_records": 2,
+      "night_records": 1,
+      "day_records": 1,
+      "unknown_time_records": 0,
+      "night_time_share_pct": 50.0,
+      "unknown_time_pct": 0.0,
+      "available_court_outcomes_count": 1,
+      "sources_count": 1,
+      "freshness_latest_record": "2026-09-24",
+      "data_cutoff_date": "2026-09-26",
+      "denominator_used": "Census of India 2011 (68,000 residents)",
+      "rate_per_capita": 2.94,
+      "uncertainty_notes": [],
+      "caveats": [
+        "Reported numbers reflect public complaints and formal administrative filings, not actual total events.",
+        "Night-time comparisons are based strictly on records with documented incident occurrence times.",
+        "Per-capita rates use 2011 baseline figures; changes in commercial footfall and residency apply."
+      ]
+    }
+  },
+  "cases": {
+    "CASE-2026-001": {
+      "id": "b7fc2fcb-27a0-4eaf-bc1e-dbae148cf696",
+      "public_id": "CASE-2026-001",
+      "category_code": "property_theft",
+      "category_name": "Property Theft",
+      "primary_area_name": "ward_kmc_central",
+      "jurisdiction_name": "West Bengal Police / Judicial Subordinate Court",
+      "current_status": "investigation",
+      "current_status_label": "Investigation",
+      "is_guilt_proven": false,
+      "disclaimer": "LEGAL NOTICE: Procedural milestones reflect official registry filings. An initial allegation, media report, FIR, or police chargesheet does NOT constitute proof of guilt. Under Indian constitutional jurisprudence, an accused person is presumed innocent until proven guilty beyond reasonable doubt in a competent court of law.",
+      "timeline": [
+        {
+          "id": "bf5858e7-549a-4e1f-84aa-6b6b2817a8c8",
+          "event_order": 1,
+          "status": "reported",
+          "status_label": "Reported",
+          "effective_date": "2026-02-10T14:30:00Z",
+          "effective_date_precision": "exact",
+          "recorded_at": "2026-09-27T14:28:07.403305Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Public report of commercial equipment theft from warehouse dock.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "c4d79e56-f196-4559-bad8-8eb66cca16ef",
+          "event_order": 2,
+          "status": "fir_registered",
+          "status_label": "Fir Registered",
+          "effective_date": "2026-02-11T10:00:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.403311Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "First Information Report formally registered under Section 303 BNS (Theft).",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "e36dbcaa-417c-45ff-8d36-da4da4ab93f7",
+          "event_order": 3,
+          "status": "investigation",
+          "status_label": "Investigation",
+          "effective_date": "2026-03-01T09:00:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.403314Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Investigative inquiry initiated with inventory reconciliation.",
+          "is_guilt_finding": false,
+          "notes": null
+        }
+      ]
+    },
+    "CASE-2026-002": {
+      "id": "78baa73b-e27e-429a-9f3f-e1b31f309aa7",
+      "public_id": "CASE-2026-002",
+      "category_code": "assault_physical_violence",
+      "category_name": "Assault Physical Violence",
+      "primary_area_name": "ward_howrah_station",
+      "jurisdiction_name": "West Bengal Police / Judicial Subordinate Court",
+      "current_status": "acquitted",
+      "current_status_label": "Acquitted",
+      "is_guilt_proven": false,
+      "disclaimer": "LEGAL NOTICE: Procedural milestones reflect official registry filings. An initial allegation, media report, FIR, or police chargesheet does NOT constitute proof of guilt. Under Indian constitutional jurisprudence, an accused person is presumed innocent until proven guilty beyond reasonable doubt in a competent court of law.",
+      "timeline": [
+        {
+          "id": "0daca057-b6d8-4018-82d7-53569944582d",
+          "event_order": 1,
+          "status": "reported",
+          "status_label": "Reported",
+          "effective_date": "2026-01-15T22:45:00Z",
+          "effective_date_precision": "exact",
+          "recorded_at": "2026-09-27T14:28:07.405942Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Public disturbance altercation reported near transit forecourt.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "45e0e167-3b9d-4c95-8640-6d9910d627b6",
+          "event_order": 2,
+          "status": "fir_registered",
+          "status_label": "Fir Registered",
+          "effective_date": "2026-01-16T08:00:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.405947Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "FIR recorded under Section 115 BNS (Voluntarily causing hurt).",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "1822801f-6277-42b6-b2d6-5d52402db585",
+          "event_order": 3,
+          "status": "chargesheet",
+          "status_label": "Chargesheet",
+          "effective_date": "2026-04-12T11:00:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.405950Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Investigating officer filed police report / chargesheet in local magistrate court.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "9b1dea8c-641f-4674-b19e-ea8efaf06323",
+          "event_order": 4,
+          "status": "trial",
+          "status_label": "Trial",
+          "effective_date": "2026-05-20T10:30:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.405953Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Judicial trial proceedings commenced before Judicial Magistrate First Class.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "3851ccef-df44-4655-a9ec-eb1d20aadcb3",
+          "event_order": 5,
+          "status": "acquitted",
+          "status_label": "Acquitted",
+          "effective_date": "2026-08-14T15:00:00Z",
+          "effective_date_precision": "exact",
+          "recorded_at": "2026-09-27T14:28:07.405955Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Court-recorded final judgment: Acquittal recorded due to contradictory witness testimony. Accused person discharged.",
+          "is_guilt_finding": false,
+          "notes": null
+        }
+      ]
+    },
+    "CASE-2026-003": {
+      "id": "1d078e0e-5a15-4e2a-b180-0b30b1eef12d",
+      "public_id": "CASE-2026-003",
+      "category_code": "traffic_road_safety",
+      "category_name": "Traffic Road Safety",
+      "primary_area_name": "ward_saltlake_sector5",
+      "jurisdiction_name": "West Bengal Police / Judicial Subordinate Court",
+      "current_status": "convicted",
+      "current_status_label": "Convicted",
+      "is_guilt_proven": true,
+      "disclaimer": "LEGAL NOTICE: Procedural milestones reflect official registry filings. An initial allegation, media report, FIR, or police chargesheet does NOT constitute proof of guilt. Under Indian constitutional jurisprudence, an accused person is presumed innocent until proven guilty beyond reasonable doubt in a competent court of law.",
+      "timeline": [
+        {
+          "id": "d7f23259-ce82-40e9-a700-a961c81aaedb",
+          "event_order": 1,
+          "status": "reported",
+          "status_label": "Reported",
+          "effective_date": "2026-03-22T01:15:00Z",
+          "effective_date_precision": "exact",
+          "recorded_at": "2026-09-27T14:28:07.408532Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Vehicle collision with divider reported on arterial crossover at night.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "2fc890e0-5c21-4229-9691-edd42c50e2b3",
+          "event_order": 2,
+          "status": "fir_registered",
+          "status_label": "Fir Registered",
+          "effective_date": "2026-03-22T06:00:00Z",
+          "effective_date_precision": "exact",
+          "recorded_at": "2026-09-27T14:28:07.408537Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "FIR filed under Section 281 BNS (Rash driving on a public way).",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "fa96a904-0722-4c42-9c86-0ae6a3e8d81e",
+          "event_order": 3,
+          "status": "chargesheet",
+          "status_label": "Chargesheet",
+          "effective_date": "2026-06-10T12:00:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.408540Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Chargesheet submitted following mechanical inspection report.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "d7e158c8-ebd3-4d0e-8c48-b4d82ccd3268",
+          "event_order": 4,
+          "status": "convicted",
+          "status_label": "Convicted",
+          "effective_date": "2026-09-02T14:30:00Z",
+          "effective_date_precision": "exact",
+          "recorded_at": "2026-09-27T14:28:07.408543Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Court judgment: Driver pled guilty to speeding; sentenced to statutory fine under Motor Vehicles Act.",
+          "is_guilt_finding": true,
+          "notes": null
+        }
+      ]
+    },
+    "CASE-2026-004": {
+      "id": "8097ccf9-ce6f-4008-8f54-0bebca7c5054",
+      "public_id": "CASE-2026-004",
+      "category_code": "sexual_offenses_harassment",
+      "category_name": "Sexual Offenses Harassment",
+      "primary_area_name": "dist_kolkata",
+      "jurisdiction_name": "West Bengal Police / Judicial Subordinate Court",
+      "current_status": "fir_registered",
+      "current_status_label": "Fir Registered",
+      "is_guilt_proven": false,
+      "disclaimer": "LEGAL NOTICE: Procedural milestones reflect official registry filings. An initial allegation, media report, FIR, or police chargesheet does NOT constitute proof of guilt. Under Indian constitutional jurisprudence, an accused person is presumed innocent until proven guilty beyond reasonable doubt in a competent court of law.",
+      "timeline": [
+        {
+          "id": "2b92536c-c5d3-4e78-9b86-7ce243dd3cb5",
+          "event_order": 1,
+          "status": "reported",
+          "status_label": "Reported",
+          "effective_date": "2026-04-05T21:00:00Z",
+          "effective_date_precision": "hour_only",
+          "recorded_at": "2026-09-27T14:28:07.409589Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "Public safety report of street harassment recorded; coordinates generalized to district boundary.",
+          "is_guilt_finding": false,
+          "notes": null
+        },
+        {
+          "id": "805b5d66-5e9c-49ac-837e-b02796acb903",
+          "event_order": 2,
+          "status": "fir_registered",
+          "status_label": "Fir Registered",
+          "effective_date": "2026-04-06T11:00:00Z",
+          "effective_date_precision": "date_only",
+          "recorded_at": "2026-09-27T14:28:07.409593Z",
+          "source_id": "wb_pilot_synthetic_demo",
+          "source_name": "Bengal Safety Map Synthetic Demonstration Generator",
+          "source_url": "https://github.com/bengal-safety-map/demo-fixtures",
+          "source_excerpt": "FIR registered under Section 74 BNS. Identity protected by statute.",
+          "is_guilt_finding": false,
+          "notes": null
+        }
+      ]
+    }
+  },
+  "packages": [
+    {
+      "package_id": "pkg_kolkata_metro_v1",
+      "area_code": "kolkata_metro",
+      "area_name": "Greater Kolkata Pilot (KMC, Bidhannagar, Howrah, New Town)",
+      "release_version": "1.0.0-demo",
+      "data_cutoff": "2026-09-26T23:59:59+00:00",
+      "record_count": 18,
+      "file_size_bytes": 11241,
+      "sha256_checksum": "053821f6fbbe1588c12d01a633117ee1ce2eb2ddb974eacbd57c1ab76c84c304",
+      "created_at": "2026-09-27T14:28:08.034692+00:00",
+      "expires_at": "2026-10-27T14:28:08.034692+00:00",
+      "is_stale": false,
+      "download_url": "/api/v1/offline-packages/pkg_kolkata_metro_v1/download"
+    }
+  ],
+  "download_bundle": {
+    "package_id": "pkg_kolkata_metro_v1",
+    "area_code": "kolkata_metro",
+    "area_name": "Greater Kolkata Pilot (KMC, Bidhannagar, Howrah, New Town)",
+    "release_version": "1.0.0-demo",
+    "data_cutoff": "2026-09-26T23:59:59+00:00",
+    "created_at": "2026-09-27T14:28:08.034692+00:00",
+    "expires_at": "2026-10-27T14:28:08.034692+00:00",
+    "methodology": {
+      "night_definition": "20:00 - 5:00 IST",
+      "small_cell_threshold": 5,
+      "non_prediction_guarantee": "This offline package contains descriptive historical reporting. It contains zero danger predictions or individual risk scores."
+    },
+    "source_manifest": [
+      {
+        "id": "wb_pilot_synthetic_demo",
+        "name": "Bengal Safety Map Synthetic Demonstration Generator",
+        "organization": "Civic Data Sandbox",
+        "license": "Creative Commons Public Domain Dedication (CC0)",
+        "status": "synthetic_demo",
+        "canonical_url": "https://github.com/bengal-safety-map/demo-fixtures"
+      },
+      {
+        "id": "wb_police_public_notices",
+        "name": "State Police Public Safety Bulletins",
+        "organization": "West Bengal Police (Prospective Official Adapter)",
+        "license": "Open Government Data License - India",
+        "status": "unconfigured",
+        "canonical_url": "https://policewb.gov.in/notices"
+      },
+      {
+        "id": "wb_ecourts_dispositions",
+        "name": "Judicial Court Cause Lists & Dispositions",
+        "organization": "E-Courts India (Calcutta HC Jurisdiction)",
+        "license": "Judicial Public Domain / Permitted Citations",
+        "status": "unconfigured",
+        "canonical_url": "https://services.ecourts.gov.in"
+      },
+      {
+        "id": "wb_state_statistical_handbook",
+        "name": "State Socio-Economic & Demographic Handbook",
+        "organization": "Bureau of Applied Economics and Statistics, WB",
+        "license": "Open Government Data License - India",
+        "status": "unconfigured",
+        "canonical_url": "http://wbpspm.gov.in"
+      }
+    ],
+    "aggregates": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "agg_dist_kolkata",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.3697,
+              22.5697
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_dist_kolkata",
+            "area_id": "dist_kolkata",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_dist_north24parganas",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.477,
+              22.7185
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_dist_north24parganas",
+            "area_id": "dist_north24parganas",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_dist_howrah",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.2636,
+              22.5958
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_dist_howrah",
+            "area_id": "dist_howrah",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_kmc_central",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.3512,
+              22.5718
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_kmc_central",
+            "area_id": "ward_kmc_central",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_kmc_north",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.3712,
+              22.6015
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_kmc_north",
+            "area_id": "ward_kmc_north",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_kmc_south",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.365,
+              22.528
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_kmc_south",
+            "area_id": "ward_kmc_south",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_kmc_port",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.32,
+              22.535
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_kmc_port",
+            "area_id": "ward_kmc_port",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_saltlake_sector5",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.4344,
+              22.5768
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_saltlake_sector5",
+            "area_id": "ward_saltlake_sector5",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_newtown_actionarea1",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.472,
+              22.589
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_newtown_actionarea1",
+            "area_id": "ward_newtown_actionarea1",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "agg_ward_howrah_station",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.341,
+              22.586
+            ]
+          },
+          "properties": {
+            "cell_id": "agg_ward_howrah_station",
+            "area_id": "ward_howrah_station",
+            "total_count": "<5",
+            "is_suppressed": true
+          }
+        }
+      ]
+    },
+    "incidents": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "id": "INC-2026-101",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.352,
+              22.572
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-101",
+            "category_code": "property_theft",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-02-10T09:00:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": false,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-102",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.341,
+              22.585
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-102",
+            "category_code": "assault_physical_violence",
+            "sensitivity_tier": "high",
+            "occurred_at": "2026-01-15T17:15:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-103",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.434,
+              22.576
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-103",
+            "category_code": "traffic_road_safety",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-03-21T19:45:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-104",
+          "geometry": null,
+          "properties": {
+            "public_id": "INC-2026-104",
+            "category_code": "sexual_offenses_harassment",
+            "sensitivity_tier": "critical",
+            "occurred_at": "2026-04-05T15:30:00+00:00",
+            "occurred_time_precision": "hour_only",
+            "is_night": true,
+            "spatial_precision": "exact_suppressed",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-105",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.371,
+              22.601
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-105",
+            "category_code": "property_theft",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-05-17T18:30:00+00:00",
+            "occurred_time_precision": "date_only",
+            "is_night": null,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-106",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.365,
+              22.529
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-106",
+            "category_code": "public_disturbance",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-06-12T18:00:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-107",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.32,
+              22.535
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-107",
+            "category_code": "substance_narcotics",
+            "sensitivity_tier": "high",
+            "occurred_at": "2026-07-04T14:10:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": false,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-108",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.472,
+              22.59
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-108",
+            "category_code": "traffic_road_safety",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-08-20T16:15:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-109",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.435,
+              22.576
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-109",
+            "category_code": "financial_fraud_cyber",
+            "sensitivity_tier": "standard",
+            "occurred_at": null,
+            "occurred_time_precision": "unknown",
+            "is_night": null,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-110",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.351,
+              22.572
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-110",
+            "category_code": "property_theft",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-08-31T21:45:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-111",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.341,
+              22.586
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-111",
+            "category_code": "assault_physical_violence",
+            "sensitivity_tier": "high",
+            "occurred_at": "2026-09-05T10:30:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": false,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-112",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.371,
+              22.602
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-112",
+            "category_code": "public_disturbance",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-09-10T16:45:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-113",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.365,
+              22.528
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-113",
+            "category_code": "traffic_road_safety",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-09-12T03:00:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": false,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-114",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.435,
+              22.577
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-114",
+            "category_code": "property_theft",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-09-15T15:40:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-115",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.472,
+              22.589
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-115",
+            "category_code": "traffic_road_safety",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-09-18T18:20:00+00:00",
+            "occurred_time_precision": "exact",
+            "is_night": true,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-116",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              88.351,
+              22.572
+            ]
+          },
+          "properties": {
+            "public_id": "INC-2026-116",
+            "category_code": "property_theft",
+            "sensitivity_tier": "standard",
+            "occurred_at": "2026-09-20T06:30:00+00:00",
+            "occurred_time_precision": "hour_only",
+            "is_night": false,
+            "spatial_precision": "hex_500m",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-117",
+          "geometry": null,
+          "properties": {
+            "public_id": "INC-2026-117",
+            "category_code": "domestic_violence_family",
+            "sensitivity_tier": "critical",
+            "occurred_at": "2026-09-21T18:30:00+00:00",
+            "occurred_time_precision": "date_only",
+            "is_night": null,
+            "spatial_precision": "exact_suppressed",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        },
+        {
+          "type": "Feature",
+          "id": "INC-2026-118",
+          "geometry": null,
+          "properties": {
+            "public_id": "INC-2026-118",
+            "category_code": "offenses_against_minors",
+            "sensitivity_tier": "critical",
+            "occurred_at": null,
+            "occurred_time_precision": "unknown",
+            "is_night": null,
+            "spatial_precision": "exact_suppressed",
+            "source_id": "wb_pilot_synthetic_demo"
+          }
+        }
+      ]
+    }
+  }
+}

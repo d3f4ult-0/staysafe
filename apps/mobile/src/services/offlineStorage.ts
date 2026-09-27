@@ -3,6 +3,8 @@
  * Manages downloaded regional packages, integrity verification, and offline queries.
  */
 
+import { bundledDemoData } from '../data/bundledDemoData';
+
 export interface CachedPackage {
   package_id: string;
   area_code: string;
@@ -15,12 +17,24 @@ export interface CachedPackage {
   bundle: any;
 }
 
-let inMemoryCache: CachedPackage | null = null;
+const bundledPackage: CachedPackage = {
+  package_id: bundledDemoData.packages[0]?.package_id || 'pkg_kolkata_metro_v1',
+  area_code: bundledDemoData.packages[0]?.area_code || 'kolkata_metro',
+  area_name: bundledDemoData.packages[0]?.area_name || 'Greater Kolkata Metropolitan Area',
+  release_version: bundledDemoData.packages[0]?.release_version || 'synthetic_demo_v1',
+  record_count: bundledDemoData.packages[0]?.record_count || 18,
+  file_size_bytes: bundledDemoData.packages[0]?.file_size_bytes || 11241,
+  sha256_checksum: bundledDemoData.packages[0]?.sha256_checksum || '053821f6fbbe1588c12d01a633117ee1ce2eb2ddb974eacbd57c1ab76c84c304',
+  created_at: bundledDemoData.packages[0]?.created_at || '2026-09-27T10:00:00Z',
+  expires_at: bundledDemoData.packages[0]?.expires_at || '2027-09-27T10:00:00Z',
+  bundle: bundledDemoData.download_bundle,
+} as CachedPackage;
+
+let inMemoryCache: CachedPackage | null = bundledPackage;
 
 export const offlineStorage = {
   async savePackage(pkg: CachedPackage): Promise<void> {
     inMemoryCache = pkg;
-    // In React Native environment, persist to SQLite / AsyncStorage
     try {
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem(`offline_${pkg.package_id}`, JSON.stringify(pkg));
@@ -44,6 +58,10 @@ export const offlineStorage = {
       }
     } catch {
       // Memory fallback
+    }
+
+    if (packageId === bundledPackage.package_id) {
+      return bundledPackage;
     }
     return inMemoryCache;
   },

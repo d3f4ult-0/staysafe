@@ -18,7 +18,7 @@ on:
 
 jobs:
   build-android:
-    name: Build Android Artifact
+    name: Build Signed Android Release
     runs-on: ubuntu-latest
 
     steps:
@@ -53,24 +53,61 @@ jobs:
         run: |
           npx --prefix apps/mobile expo prebuild --platform android --no-install
 
-      - name: Build Android APK (Debug / Direct Install)
+      - name: Create Release Signing Keystore
+        run: |
+          keytool -genkey -v \
+            -keystore apps/mobile/android/app/release.keystore \
+            -alias bengalsafety \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass bengalsafetypass \
+            -keypass bengalsafetypass \
+            -dname "CN=Bengal Safety Map, OU=CivicTech, O=Bengal Safety Map, L=Kolkata, ST=West Bengal, C=IN"
+
+      - name: Configure Gradle Signing Config
+        run: |
+          python3 -c "
+          build_gradle = 'apps/mobile/android/app/build.gradle'
+          with open(build_gradle, 'r') as f:
+              content = f.read()
+
+          signing_block = '''
+              release {
+                  storeFile file('release.keystore')
+                  storePassword 'bengalsafetypass'
+                  keyAlias 'bengalsafety'
+                  keyPassword 'bengalsafetypass'
+              }
+          '''
+          if 'signingConfigs {' in content:
+              content = content.replace('signingConfigs {', 'signingConfigs {\n' + signing_block)
+              content = content.replace('signingConfig signingConfigs.debug', 'signingConfig signingConfigs.release')
+              with open(build_gradle, 'w') as f:
+                  f.write(content)
+              print('Gradle signing configured successfully')
+          "
+
+      - name: Build Signed Android APK (Direct End-User Install)
         if: ${{ github.event.inputs.build_type == 'apk' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
         run: |
           cd apps/mobile/android
-          ./gradlew assembleDebug --no-daemon
+          ./gradlew assembleRelease --no-daemon
+          cp app/build/outputs/apk/release/app-release.apk ../../../bengal-safety-map.apk
 
-      - name: Build Android AAB (Release Bundle for Play Store)
+      - name: Build Android AAB (Release Bundle for Google Play)
         if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
         run: |
           cd apps/mobile/android
           ./gradlew bundleRelease --no-daemon
+          cp app/build/outputs/bundle/release/app-release.aab ../../../bengal-safety-map.aab
 
-      - name: Upload APK to GitHub Artifacts
+      - name: Upload Signed APK to GitHub Artifacts
         if: ${{ github.event.inputs.build_type == 'apk' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
         uses: actions/upload-artifact@v4
         with:
           name: bengal-safety-map-apk
-          path: apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          path: bengal-safety-map.apk
           if-no-files-found: error
           retention-days: 30
 
@@ -79,16 +116,17 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bengal-safety-map-aab
-          path: apps/mobile/android/app/build/outputs/bundle/release/app-release.aab
+          path: bengal-safety-map.aab
           if-no-files-found: error
           retention-days: 30
 
-      - name: Attach APK to GitHub Release
+      - name: Attach Signed APK & AAB to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk
+            bengal-safety-map.apk
+            bengal-safety-map.aab
           generate_release_notes: true
           draft: false
           prerelease: false

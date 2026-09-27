@@ -10,8 +10,26 @@ This document details how to develop, test, build, and distribute the **Bengal S
 - **Routing:** Expo Router v4 (file-based navigation with tabs and modal timeline route)
 - **State Management:** Zustand (`useAppStore` for time filters, area selection, language, offline mode)
 - **Server Cache:** TanStack React Query v5
-- **Local SQLite / Offline Store:** Local structured bundle cache with SHA-256 verification and stale detection
+- **Local SQLite / Offline Store:** Bundled synthetic demo fixtures stored in SQLite (`bengal_safety_map.db`) with SHA-256 integrity verification and fallback query engine
 - **Icons & UI:** Lucide React Native, accessible high-contrast palettes, Safe Area contexts
+
+---
+
+## 🔄 Dual Operating Modes
+
+The app is engineered with two distinct, transparent operating modes:
+
+### 1. Built-in Offline Demo Mode (Default)
+- **Zero-Setup Guarantee:** Enabled by default in all release builds. Normal users need only download and tap the APK to have a 100% working app immediately.
+- **Preloaded SQLite Dataset:** Contains 18 synthetic demonstration records, 7 pilot area summaries, spatial aggregate grids, and 4 procedural legal case progression timelines.
+- **Complete Feature Set Offline:** Interactive Explore Map, Night-Time Lens (20:00–05:00 IST), Area Summaries with population normalization, Legal Case Timelines, and Sources & Methodology screens function fully without network access.
+- **Honest Labeling:** A persistent, non-removable banner clearly states: *"Demo data — synthetic, not real incident data. Built-in offline dataset (v1.0.0 • Sep 2026)."* Never falsely implies live updates.
+
+### 2. Connected Data Mode
+- **Activates on Configuration:** Activated when an organization or researcher enters a verified production API URL in the **Settings** tab.
+- **Background Sync & Cache:** Periodically syncs fresh, versioned public records and updates the local SQLite database.
+- **Resilient Fallback:** If internet connectivity drops or the remote server returns an error, the app gracefully falls back to local SQLite data and updates the status indicator to *"Offline Mode: Displaying locally cached verified records."*
+- **Zero Error Screens:** The application never displays empty or blank error screens.
 
 ---
 

@@ -7,10 +7,12 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../services/api';
 import { useAppStore } from '../../store/useAppStore';
+import { localDatabase } from '../../services/localDatabase';
 import {
   Settings,
   Languages,
@@ -19,11 +21,19 @@ import {
   FileText,
   RotateCcw,
   Check,
-  AlertCircle,
+  Sparkles,
+  Wifi,
+  WifiOff,
+  Database,
+  RefreshCw,
 } from 'lucide-react-native';
 
 export default function SettingsScreen() {
+  const queryClient = useQueryClient();
   const {
+    dataMode,
+    setDataMode,
+    connectionStatus,
     apiUrl,
     setApiUrl,
     appLanguage,
@@ -31,26 +41,167 @@ export default function SettingsScreen() {
   } = useAppStore();
 
   const [inputUrl, setInputUrl] = useState(apiUrl);
-  const [isSavedUrl, setIsSavedUrl] = useState(false);
+  const [isTesting, setIsTesting] = useState(false);
 
   const { data: metadata } = useQuery({
     queryKey: ['metadata'],
     queryFn: () => api.getMetadata(),
   });
 
-  const handleSaveApiUrl = () => {
-    if (!inputUrl.trim().startsWith('http')) {
-      Alert.alert('Invalid URL', 'Backend URL must begin with http:// or https://');
+  const handleSelectMode = (mode: 'demo' | 'connected') => {
+    setDataMode(mode);
+    queryClient.invalidateQueries();
+    if (mode === 'demo') {
+      Alert.alert(
+        'Offline Demo Mode Active',
+        'App is now operating entirely offline using bundled synthetic demo records. No backend connection is required.'
+      );
+    }
+  };
+
+  const handleSaveAndSync = async () => {
+    const trimmed = inputUrl.trim();
+    if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+      Alert.alert('Invalid Endpoint', 'API URL must begin with http:// or https://');
       return;
     }
-    setApiUrl(inputUrl.trim());
-    setIsSavedUrl(true);
-    setTimeout(() => setIsSavedUrl(false), 2500);
-    Alert.alert('Configuration Saved', `Active API URL set to:\n${inputUrl.trim()}`);
+
+    setIsTesting(true);
+    setApiUrl(trimmed);
+    setDataMode('connected');
+
+    try {
+      const res = await fetch(`${trimmed}/api/v1/metadata`, { signal: AbortSignal.timeout(4000) });
+      if (res.ok) {
+        const meta = await res.json();
+        Alert.alert(
+          'Connected Successfully',
+          `Connected to verified host!\nDataset Version: ${meta.dataset_version || 'Production'}`
+        );
+      } else {
+        Alert.alert(
+          'Server Error',
+          `Server returned HTTP ${res.status}. Falling back safely to local cached records.`
+        );
+      }
+    } catch (err: any) {
+      Alert.alert(
+        'Offline Fallback Active',
+        `Could not reach ${trimmed}.\n\nThe app will continue working seamlessly using local offline records.`
+      );
+    } finally {
+      setIsTesting(false);
+      queryClient.invalidateQueries();
+    }
+  };
+
+  const handleResetToBundled = () => {
+    localDatabase.resetToBundledDemo();
+    setDataMode('demo');
+    setInputUrl('');
+    setApiUrl('');
+    queryClient.invalidateQueries();
+    Alert.alert('Reset Complete', 'All settings and data have been restored to the initial bundled offline demo state.');
   };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      {/* Operating Mode Selector */}
+      <View style={styles.card}>
+        <View style={styles.cardHeader}>
+          <Database size={16} color="#1e3a8a" />
+          <Text style={styles.cardTitle}>Operating Mode</Text>
+        </View>
+        <Text style={styles.cardSubtitle}>
+          Choose how the app receives data. Release builds run in Built-in Offline Demo Mode by default with zero setup required.
+        </Text>
+
+        <View style={styles.modeToggleGroup}>
+          <TouchableOpacity
+            style={[styles.modeButton, dataMode === 'demo' && styles.modeButtonActive]}
+            onPress={() => handleSelectMode('demo')}
+          >
+            <Sparkles size={14} color={dataMode === 'demo' ? '#ffffff' : '#475569'} />
+            <Text style={[styles.modeButtonText, dataMode === 'demo' && styles.modeButtonTextActive]}>
+              Built-in Offline Demo
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.modeButton, dataMode === 'connected' && styles.modeButtonActive]}
+            onPress={() => handleSelectMode('connected')}
+          >
+            <Wifi size={14} color={dataMode === 'connected' ? '#ffffff' : '#475569'} />
+            <Text style={[styles.modeButtonText, dataMode === 'connected' && styles.modeButtonTextActive]}>
+              Connected Data Mode
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* Mode Status Banner Card */}
+      {dataMode === 'demo' ? (
+        <View style={[styles.card, styles.demoStatusCard]}>
+          <View style={styles.cardHeader}>
+            <Sparkles size={16} color="#92400e" />
+            <Text style={[styles.cardTitle, { color: '#92400e' }]}>Built-in Offline Demo Active</Text>
+          </View>
+          <Text style={styles.demoNoticeText}>
+            • <Text style={styles.bold}>Zero Setup Required:</Text> Fully functional offline. No server, Docker, API keys, or user login needed.
+            {'\n'}• <Text style={styles.bold}>Synthetic Data:</Text> Clearly labelled demonstration fixtures. Not real incident records.
+            {'\n'}• <Text style={styles.bold}>Release Build Date:</Text> September 2026 (v1.0.0-demo).
+          </Text>
+        </View>
+      ) : (
+        /* Connected Mode Endpoint Configuration */
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Server size={16} color="#0f766e" />
+            <Text style={styles.cardTitle}>Production API Endpoint</Text>
+          </View>
+          <Text style={styles.cardSubtitle}>
+            Configure the verified open civic safety backend. Automatically falls back to local SQLite if offline.
+          </Text>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.textInput}
+              value={inputUrl}
+              onChangeText={setInputUrl}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="https://api.staysafe-bengal.org"
+            />
+            <TouchableOpacity
+              style={styles.syncBtn}
+              onPress={handleSaveAndSync}
+              disabled={isTesting}
+            >
+              {isTesting ? (
+                <ActivityIndicator size="small" color="#ffffff" />
+              ) : (
+                <Text style={styles.syncBtnText}>Test & Sync</Text>
+              )}
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.presetRow}>
+            <TouchableOpacity
+              style={styles.presetChip}
+              onPress={() => setInputUrl('https://api.staysafe-bengal.org')}
+            >
+              <Text style={styles.presetText}>Official Production API</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.presetChip}
+              onPress={() => setInputUrl('http://10.0.2.2:8000')}
+            >
+              <Text style={styles.presetText}>Emulator Localhost (10.0.2.2)</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+
       {/* Language Selector */}
       <View style={styles.card}>
         <View style={styles.cardHeader}>
@@ -58,7 +209,7 @@ export default function SettingsScreen() {
           <Text style={styles.cardTitle}>App Language / ভাষা</Text>
         </View>
         <Text style={styles.cardSubtitle}>
-          Choose your interface language. Bengali strings are initialized for civic accessibility.
+          Select interface language. Bengali strings are initialized for civic accessibility.
         </Text>
 
         <View style={styles.langRow}>
@@ -84,52 +235,11 @@ export default function SettingsScreen() {
         </View>
       </View>
 
-      {/* Backend API Server Configuration */}
-      <View style={styles.card}>
-        <View style={styles.cardHeader}>
-          <Server size={16} color="#0f766e" />
-          <Text style={styles.cardTitle}>Backend Server Endpoint</Text>
-        </View>
-        <Text style={styles.cardSubtitle}>
-          Configure the API endpoint. Use 10.0.2.2:8000 on Android Emulator to reach host machine.
-        </Text>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.textInput}
-            value={inputUrl}
-            onChangeText={setInputUrl}
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="http://localhost:8000"
-          />
-          <TouchableOpacity style={styles.saveBtn} onPress={handleSaveApiUrl}>
-            <Text style={styles.saveBtnText}>{isSavedUrl ? 'Saved!' : 'Update'}</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Preset quick buttons */}
-        <View style={styles.presetRow}>
-          <TouchableOpacity
-            style={styles.presetChip}
-            onPress={() => setInputUrl('http://10.0.2.2:8000')}
-          >
-            <Text style={styles.presetText}>Android Emulator (10.0.2.2)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.presetChip}
-            onPress={() => setInputUrl('http://localhost:8000')}
-          >
-            <Text style={styles.presetText}>Localhost (8000)</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* System Metadata & Dataset Version */}
+      {/* Dataset & Metadata Info */}
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <FileText size={16} color="#1e293b" />
-          <Text style={styles.cardTitle}>Dataset & Release Metadata</Text>
+          <Text style={styles.cardTitle}>Dataset & Build Metadata</Text>
         </View>
 
         <View style={styles.metaGrid}>
@@ -138,25 +248,30 @@ export default function SettingsScreen() {
             <Text style={styles.metaValue}>1.0.0 (Expo SDK 52)</Text>
           </View>
           <View style={styles.metaRow}>
-            <Text style={styles.metaLabel}>Pilot Region:</Text>
-            <Text style={styles.metaValue}>Greater Kolkata Metro Core</Text>
+            <Text style={styles.metaLabel}>Operating Mode:</Text>
+            <Text style={styles.metaValue}>{dataMode === 'demo' ? 'Offline Demo (Bundled)' : 'Connected'}</Text>
           </View>
           <View style={styles.metaRow}>
-            <Text style={styles.metaLabel}>Night Time Window:</Text>
+            <Text style={styles.metaLabel}>Dataset Version:</Text>
+            <Text style={styles.metaValue}>{metadata?.dataset_version || 'synthetic_demo_v1'}</Text>
+          </View>
+          <View style={styles.metaRow}>
+            <Text style={styles.metaLabel}>Night Time Definition:</Text>
             <Text style={styles.metaValue}>20:00 - 05:00 IST</Text>
           </View>
           <View style={styles.metaRow}>
-            <Text style={styles.metaLabel}>Data Redaction:</Text>
+            <Text style={styles.metaLabel}>Privacy Threshold:</Text>
             <Text style={styles.metaValue}>~500m cells | k &gt;= 5 suppression</Text>
           </View>
-          <View style={styles.metaRow}>
-            <Text style={styles.metaLabel}>Dataset Status:</Text>
-            <Text style={styles.metaValue}>{metadata?.dataset_version || 'synthetic_demo_v1'}</Text>
-          </View>
         </View>
+
+        <TouchableOpacity style={styles.resetBtn} onPress={handleResetToBundled}>
+          <RotateCcw size={13} color="#64748b" style={{ marginRight: 4 }} />
+          <Text style={styles.resetBtnText}>Restore Initial Bundled Demo State</Text>
+        </TouchableOpacity>
       </View>
 
-      {/* Ethics & Data Integrity Charter */}
+      {/* Ethics & Data Charter */}
       <View style={[styles.card, styles.charterCard]}>
         <View style={styles.cardHeader}>
           <Shield size={16} color="#0f766e" />
@@ -164,9 +279,9 @@ export default function SettingsScreen() {
         </View>
         <Text style={styles.charterText}>
           • <Text style={styles.bold}>Non-Stigmatization:</Text> No community, neighborhood, or group is classified as unsafe.
-          {'\n'}• <Text style={styles.bold}>No Predictive Policing:</Text> Historical reports are not used to forecast individual crime or rate danger.
-          {'\n'}• <Text style={styles.bold}>No Dossiers:</Text> Individual accused or victim identities are strictly excluded from public display.
-          {'\n'}• <Text style={styles.bold}>Procedural Honesty:</Text> An allegation is never conflated with a legal conviction.
+          {'\n'}• <Text style={styles.bold}>No Predictive Policing:</Text> Historical reports are never used to forecast individual crime or rate danger.
+          {'\n'}• <Text style={styles.bold}>No Dossiers:</Text> Individual accused or victim identities are strictly excluded.
+          {'\n'}• <Text style={styles.bold}>Procedural Honesty:</Text> An allegation or FIR is never conflated with a legal conviction.
         </Text>
       </View>
     </ScrollView>
@@ -205,6 +320,44 @@ const styles = StyleSheet.create({
     color: '#64748b',
     marginBottom: 10,
     lineHeight: 16,
+  },
+  modeToggleGroup: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  modeButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 9,
+    paddingHorizontal: 8,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    backgroundColor: '#f8fafc',
+    gap: 6,
+  },
+  modeButtonActive: {
+    backgroundColor: '#1e3a8a',
+    borderColor: '#1e3a8a',
+  },
+  modeButtonText: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: '#334155',
+  },
+  modeButtonTextActive: {
+    color: '#ffffff',
+  },
+  demoStatusCard: {
+    backgroundColor: '#fffbeb',
+    borderColor: '#fde68a',
+  },
+  demoNoticeText: {
+    fontSize: 11,
+    lineHeight: 18,
+    color: '#92400e',
   },
   langRow: {
     flexDirection: 'row',
@@ -249,14 +402,14 @@ const styles = StyleSheet.create({
     fontFamily: 'monospace',
     color: '#0f172a',
   },
-  saveBtn: {
+  syncBtn: {
     backgroundColor: '#0f766e',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 14,
     borderRadius: 6,
   },
-  saveBtnText: {
+  syncBtnText: {
     color: '#ffffff',
     fontSize: 11,
     fontWeight: '600',
@@ -281,6 +434,7 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 6,
     gap: 5,
+    marginBottom: 10,
   },
   metaRow: {
     flexDirection: 'row',
@@ -294,6 +448,17 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#1e293b',
     fontWeight: '600',
+  },
+  resetBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    paddingTop: 4,
+  },
+  resetBtnText: {
+    fontSize: 11,
+    color: '#64748b',
+    fontWeight: '500',
   },
   charterCard: {
     backgroundColor: '#f0fdfa',

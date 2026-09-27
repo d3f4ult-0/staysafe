@@ -10,6 +10,23 @@ A production-oriented, privacy-preserving civic-tech platform and installable Pr
 
 ---
 
+## 📲 Zero-Setup Android Installation (For Normal Users)
+
+Normal users do **not** need to install Docker, Node.js, Python, or configure any servers or API keys. The Android app is completely self-contained and works immediately offline upon installation:
+
+1. **Open the GitHub Releases page:** Navigate to the **Releases** tab in this GitHub repository (or download from the latest release link).
+2. **Download the latest `.apk`:** Tap on [`bengal-safety-map.apk`](https://github.com/bengal-safety-map/staysafe/releases) under release assets.
+3. **Allow installation if prompted:** When Android asks for permission to install unknown apps from your browser or file manager, tap **Settings** and toggle **Allow from this source**.
+4. **Install and open:** Tap **Install**, then tap **Open**.
+
+### Immediate Out-of-the-Box Experience:
+- **No sign-in or account:** No login, registration, phone number, or permissions required.
+- **Built-in Offline Demo Mode:** Preloaded with privacy-safe, clearly labelled synthetic demonstration data (`synthetic_demo_v1`) stored in local SQLite.
+- **Full functionality with zero internet:** The **Explore Map**, **Night-Time Lens (20:00–05:00 IST)**, **Area Summaries**, **Case Timelines**, and **Sources & Methodology** work seamlessly with no network connection.
+- **Never fails on unavailable backend:** The app operates locally and never presents blank or error-only screens.
+
+---
+
 ## 🎯 Product Mission & Core Boundaries
 
 ### Mission
