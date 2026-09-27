@@ -4,8 +4,8 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "typecheck": "tsc --noEmit",
     "test": "jest"
@@ -14,6 +14,7 @@
     "@tanstack/react-query": "^5.62.8",
     "expo": "~52.0.28",
     "expo-asset": "~11.0.4",
+    "expo-build-properties": "0.13.2",
     "expo-constants": "~17.0.5",
     "expo-linking": "~7.0.4",
     "expo-router": "~4.0.17",

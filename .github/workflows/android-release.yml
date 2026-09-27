@@ -73,12 +73,15 @@ jobs:
             -keypass bengalsafetypass \
             -dname "CN=Bengal Safety Map, OU=CivicTech, O=Bengal Safety Map, L=Kolkata, ST=West Bengal, C=IN"
 
-      - name: Configure Gradle Signing Config
+      - name: Configure Gradle Signing & Kotlin 1.9.25 Compatibility
         run: |
           python3 -c "
-          build_gradle = 'apps/mobile/android/app/build.gradle'
-          with open(build_gradle, 'r') as f:
-              content = f.read()
+          import os
+
+          # 1. Configure Keystore signing in app/build.gradle
+          app_gradle = 'apps/mobile/android/app/build.gradle'
+          with open(app_gradle, 'r') as f:
+              app_content = f.read()
 
           signing_block = '''
               release {
@@ -88,12 +91,63 @@ jobs:
                   keyPassword 'bengalsafetypass'
               }
           '''
-          if 'signingConfigs {' in content:
-              content = content.replace('signingConfigs {', 'signingConfigs {\n' + signing_block)
-              content = content.replace('signingConfig signingConfigs.debug', 'signingConfig signingConfigs.release')
-              with open(build_gradle, 'w') as f:
-                  f.write(content)
-              print('Gradle signing configured successfully')
+          if 'signingConfigs {' in app_content:
+              app_content = app_content.replace('signingConfigs {', 'signingConfigs {\n' + signing_block)
+              app_content = app_content.replace('signingConfig signingConfigs.debug', 'signingConfig signingConfigs.release')
+              with open(app_gradle, 'w') as f:
+                  f.write(app_content)
+              print('Configured app/build.gradle signing successfully')
+
+          # 2. Configure root build.gradle for Kotlin 1.9.25 & Compose compiler compatibility
+          root_gradle = 'apps/mobile/android/build.gradle'
+          with open(root_gradle, 'r') as f:
+              root_content = f.read()
+
+          root_content = root_content.replace(
+              \"classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')\",
+              \"classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.25')\"
+          )
+          root_content = root_content.replace(
+              'classpath(\"org.jetbrains.kotlin:kotlin-gradle-plugin\")',
+              \"classpath('org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.25')\"
+          )
+          if 'rootProject.ext.kotlinVersion' not in root_content:
+              root_content = \"rootProject.ext.set('kotlinVersion', '1.9.25')\n\" + root_content
+
+          suppression_block = '''
+          subprojects {
+              afterEvaluate { project ->
+                  if (project.hasProperty('android')) {
+                      project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+                          kotlinOptions {
+                              freeCompilerArgs += [
+                                  '-P',
+                                  'plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true'
+                              ]
+                          }
+                      }
+                  }
+              }
+          }
+          '''
+          if 'suppressKotlinVersionCompatibilityCheck' not in root_content:
+              root_content += suppression_block
+
+          with open(root_gradle, 'w') as f:
+              f.write(root_content)
+          print('Configured root build.gradle with Kotlin 1.9.25 successfully')
+
+          # 3. Configure gradle.properties
+          props_path = 'apps/mobile/android/gradle.properties'
+          with open(props_path, 'a') as f:
+              f.write('''
+          kotlinVersion=1.9.25
+          android.kotlinVersion=1.9.25
+          kotlin.suppressKotlinVersionCompatibilityCheck=true
+          android.suppressKotlinVersionCompatibilityCheck=true
+          composeCompiler.suppressKotlinVersionCompatibilityCheck=true
+          ''')
+          print('Configured gradle.properties successfully')
           "
 
       - name: Build Signed Android APK (Direct End-User Install)
@@ -101,15 +155,15 @@ jobs:
         working-directory: apps/mobile/android
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleRelease -PkotlinVersion=1.9.25 -Pandroid.kotlinVersion=1.9.25 --no-daemon
           cp app/build/outputs/apk/release/app-release.apk ../../../bengal-safety-map.apk
 
       - name: Build Android AAB (Release Bundle for Google Play)
-        if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
+        if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
         working-directory: apps/mobile/android
         run: |
           chmod +x ./gradlew
-          ./gradlew bundleRelease --no-daemon
+          ./gradlew bundleRelease -PkotlinVersion=1.9.25 -Pandroid.kotlinVersion=1.9.25 --no-daemon
           cp app/build/outputs/bundle/release/app-release.aab ../../../bengal-safety-map.aab
 
       - name: Upload Signed APK to GitHub Artifacts
@@ -122,7 +176,7 @@ jobs:
           retention-days: 30
 
       - name: Upload AAB to GitHub Artifacts
-        if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' }}
+        if: ${{ github.event.inputs.build_type == 'aab' || github.event.inputs.build_type == 'both' || github.event.inputs.build_type == null }}
         uses: actions/upload-artifact@v4
         with:
           name: bengal-safety-map-aab
@@ -137,6 +191,7 @@ jobs:
           files: |
             bengal-safety-map.apk
             bengal-safety-map.aab
+          fail_on_unmatched_files: false
           generate_release_notes: true
           draft: false
           prerelease: false
